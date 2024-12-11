@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DONGHO</id>
+    <version>1.0.0</version>
+    <authors>DONGHO</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="7073ff0e1d20f0d2b1e47ee753ef643a4916eab9" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="Bunifu.Charts.WinForms" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Bunifu.Dataviz.WinForms" version="2.2.1" exclude="Build,Analyzers" />
+        <dependency id="Bunifu.UI.WinForms" version="7.2.0" exclude="Build,Analyzers" />
+        <dependency id="Bunifu.UI.WinForms.1.5.3" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Bunifu.UI.WinForms.NetCore" version="1.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Data.SqlClient" version="4.9.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="C:\BTL_W\BTL\bin\Debug\net8.0-windows\DONGHO.runtimeconfig.json" target="lib\net8.0-windows7.0\DONGHO.runtimeconfig.json" />
+    <file src="C:\BTL_W\BTL\bin\Debug\net8.0-windows\DONGHO.dll" target="lib\net8.0-windows7.0\DONGHO.dll" />
+  </files>
+</package>
