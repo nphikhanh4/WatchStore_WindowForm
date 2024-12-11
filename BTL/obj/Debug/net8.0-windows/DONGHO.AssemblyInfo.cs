@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DONGHO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3807cade64b11a653108895606b5f4ff1b652d79")]
 [assembly: System.Reflection.AssemblyProductAttribute("DONGHO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DONGHO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

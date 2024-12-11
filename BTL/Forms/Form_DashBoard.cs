@@ -13,6 +13,9 @@ namespace Book
 {
     public partial class Form_DashBoard : Form
     {
+        public string ReceivedData_Name { get; set; }
+        public string ReceivedData_Role { get; set; }
+
         int PanelWidth;
         bool isCollapsed;
         public Form_DashBoard()
@@ -45,7 +48,7 @@ namespace Book
         {
             if (isCollapsed)
             {
-                panelLeft.Width = panelLeft.Width + 20;
+                panelLeft.Width = panelLeft.Width + 10;
                 if (panelLeft.Width >= PanelWidth)
                 {
                     timer1.Stop();
@@ -55,8 +58,8 @@ namespace Book
             }
             else
             {
-                panelLeft.Width = panelLeft.Width - 20;
-                if (panelLeft.Width <= 80)
+                panelLeft.Width = panelLeft.Width - 10;
+                if (panelLeft.Width <= 70)
                 {
                     timer1.Stop();
                     isCollapsed = true;
@@ -88,6 +91,7 @@ namespace Book
         private void BtnSaleBooks_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnSaleBooks);
+
             UC_Sales ucS = new UC_Sales();
             AddControlsToPanel(ucS);
         }
@@ -109,20 +113,15 @@ namespace Book
         private void BtnUsers_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnUsers);
-            UC_ManageUser ucU = new UC_ManageUser();
-            AddControlsToPanel(ucU);
+            UC_KhachHang ucK = new UC_KhachHang();
+            AddControlsToPanel(ucK);
         }
-
-        //private void BtnViewSales_Click(object sender, EventArgs e)
-        //{
-        //    moveSidePanel(btnViewSales);
-        //    UC_ViewSales ucV = new UC_ViewSales();
-        //    AddControlsToPanel(ucV);
-        //}
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnSettings);
+            uc_CaiDat ucC = new uc_CaiDat();
+            AddControlsToPanel(ucC);
 
         }
 
@@ -145,6 +144,13 @@ namespace Book
         {
             moveSidePanel(btnWareHouse);
             UC_WareHouse ucW = new UC_WareHouse();
+            AddControlsToPanel(ucW);
+        }
+
+        private void btnNhanVien_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(btnNhanVien);
+            UC_NhanVien ucW = new UC_NhanVien();
             AddControlsToPanel(ucW);
         }
     }

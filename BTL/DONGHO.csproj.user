@@ -4,6 +4,12 @@
     <Compile Update="Forms\Form_ChonNCC.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Form_DangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Form_DangXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Form_DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -16,10 +22,19 @@
     <Compile Update="Forms\Form_ThongBao.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Usercontrols\uc_CaiDat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Usercontrols\UC_Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Usercontrols\UC_KhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Usercontrols\UC_ManageUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Usercontrols\UC_NhanVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Usercontrols\uc_SanPham.cs">

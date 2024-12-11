@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace DataAccessLayer
 {
@@ -220,7 +221,7 @@ namespace DataAccessLayer
             try
             {
                 DataProvider.Openconnect();
-                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductID, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) = CAST(GETDATE() AS DATE) GROUP BY OrderItem.ProductID, pd.ProductID ORDER BY TotalSales DESC;";
+                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductName, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) = CAST(GETDATE() AS DATE) GROUP BY OrderItem.ProductID, pd.ProductName ORDER BY TotalSales DESC;";
                 DataTable dt = new DataTable();
                 List<ProductDTO> lstSP = new List<ProductDTO>();
                 dt = DataProvider.GetTable(sql);
@@ -248,7 +249,7 @@ namespace DataAccessLayer
             try
             {
                 DataProvider.Openconnect();
-                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductID, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) = CAST(DATEADD(DAY, -1, GETDATE()) AS DATE) GROUP BY OrderItem.ProductID, pd.ProductID ORDER BY TotalSales DESC;";
+                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductName, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) = CAST(DATEADD(DAY, -1, GETDATE()) AS DATE) GROUP BY OrderItem.ProductID, pd.ProductName ORDER BY TotalSales DESC;";
                 DataTable dt = new DataTable();
                 List<ProductDTO> lstSP = new List<ProductDTO>();
                 dt = DataProvider.GetTable(sql);
@@ -276,7 +277,7 @@ namespace DataAccessLayer
             try
             {
                 DataProvider.Openconnect();
-                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductID, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE) GROUP BY OrderItem.ProductID, pd.ProductID ORDER BY TotalSales DESC;";
+                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductName, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE CAST([Order].OrderDate AS DATE) >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE) GROUP BY OrderItem.ProductID, pd.ProductName ORDER BY TotalSales DESC;";
                 DataTable dt = new DataTable();
                 List<ProductDTO> lstSP = new List<ProductDTO>();
                 dt = DataProvider.GetTable(sql);
@@ -304,7 +305,7 @@ namespace DataAccessLayer
             try
             {
                 DataProvider.Openconnect();
-                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductID, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE YEAR([Order].OrderDate) = YEAR(GETDATE()) AND MONTH([Order].OrderDate) = MONTH(GETDATE()) GROUP BY OrderItem.ProductID, pd.ProductID ORDER BY TotalSales DESC;";
+                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductName, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE YEAR([Order].OrderDate) = YEAR(GETDATE()) AND MONTH([Order].OrderDate) = MONTH(GETDATE()) GROUP BY OrderItem.ProductID, pd.ProductName ORDER BY TotalSales DESC;";
                 DataTable dt = new DataTable();
                 List<ProductDTO> lstSP = new List<ProductDTO>();
                 dt = DataProvider.GetTable(sql);
@@ -332,7 +333,7 @@ namespace DataAccessLayer
             try
             {
                 DataProvider.Openconnect();
-                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductID, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE YEAR([Order].OrderDate) = YEAR(DATEADD(MONTH, -1, GETDATE())) AND MONTH([Order].OrderDate) = MONTH(DATEADD(MONTH, -1, GETDATE())) GROUP BY OrderItem.ProductID, pd.ProductID ORDER BY TotalSales DESC;";
+                string sql = "SELECT TOP 10 OrderItem.ProductID, pd.ProductName, SUM(OrderItem.Quantity * pd.Price - ((OrderItem.Quantity * pd.Price * pd.Discount) / 100)) AS TotalSales FROM OrderItem JOIN Product pd ON OrderItem.ProductID = pd.ProductID JOIN [Order] ON OrderItem.OrderID = [Order].OrderID WHERE YEAR([Order].OrderDate) = YEAR(DATEADD(MONTH, -1, GETDATE())) AND MONTH([Order].OrderDate) = MONTH(DATEADD(MONTH, -1, GETDATE())) GROUP BY OrderItem.ProductID, pd.ProductName ORDER BY TotalSales DESC;";
                 DataTable dt = new DataTable();
                 List<ProductDTO> lstSP = new List<ProductDTO>();
                 dt = DataProvider.GetTable(sql);
@@ -501,5 +502,45 @@ namespace DataAccessLayer
             }
         }
         #endregion
+
+        public List<DoanhThuDTO> GetDoanhThuByDateRange(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                string sql = @"
+            SELECT CONVERT(VARCHAR(10), [Order].OrderDate, 101) AS OrderDate, 
+                   SUM([Order].TotalPrice) AS TotalSales 
+            FROM [Order] 
+            WHERE CAST([Order].OrderDate AS DATE) BETWEEN @StartDate AND @EndDate 
+            AND [Order].OrderStatus = 1 
+            GROUP BY CONVERT(VARCHAR(10), [Order].OrderDate, 101) 
+            ORDER BY OrderDate DESC;";
+                var parameters = new[]
+                {
+            new SqlParameter("@StartDate", startDate),
+            new SqlParameter("@EndDate", endDate)
+        };
+
+                DataTable dt = DataProvider.GetTable1(sql, parameters);
+                List<DoanhThuDTO> lstdtDTO = new List<DoanhThuDTO>();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    lstdtDTO.Add(new DoanhThuDTO
+                    {
+                        ngay = Convert.ToDateTime(row["OrderDate"]),
+                        doanhthu = double.Parse(row["TotalSales"].ToString())
+                    });
+                }
+                return lstdtDTO;
+            }
+            catch (Exception ex)
+            {
+                // Log the error for debugging
+                Console.WriteLine(ex.Message);
+                return new List<DoanhThuDTO>();
+            }
+        }
+
     }
 }

@@ -14,7 +14,6 @@ namespace DAL
         public static SqlConnection Openconnect()
         {
             string sChuoiKetNoi = @"Server=LAPTOP-4TC8L8F1;Database=WatchStore;Trusted_Connection=True;TrustServerCertificate=true;";
-           //  string sChuoiKetNoi = @"Data Source=DESKTOP-FA34S7I\SQLEXPRESS;Initial Catalog=TOYSTOREPOS;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
             SqlConnection con = new SqlConnection(sChuoiKetNoi);
             con.Open();
             return con;
@@ -23,6 +22,12 @@ namespace DAL
         {
             con.Close();
         }
+
+        public static string getConnectionString()
+        {
+           return @"Server=LAPTOP-4TC8L8F1;Database=WatchStore;Trusted_Connection=True;TrustServerCertificate=true;";
+        }
+
         public static int JustExcuteNoParameter(string sql)
         {
             SqlConnection con = Openconnect();
@@ -95,7 +100,8 @@ namespace DAL
                 }
             }
         }
-        //ktra email
+        //TÍNH /
+        ///ktra email
         public static object ExecuteScalar(string sql, SqlParameter[] parameters)
         {
             string connectionString = @"Data Source=LAPTOP-BJKTHL97\SQLEXPRESS;Initial Catalog=WatchStoreC#;Integrated Security=True;TrustServerCertificate=True";
@@ -119,6 +125,18 @@ namespace DAL
                 {
                     Console.WriteLine("Lỗi khi thực thi câu lệnh SQL: " + ex.Message);
                     return null;
+                }
+            }
+        }
+        public static int ExecuteCommand(string query, params SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = Openconnect())
+            {
+                //conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddRange(parameters);
+                    return cmd.ExecuteNonQuery();
                 }
             }
         }

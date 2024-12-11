@@ -62,49 +62,37 @@ namespace DONGHO.Usercontrols
         {
 
         }
-
+        List<DoanhThuDTO> lstdt = new List<DoanhThuDTO>();
+        DoanhThuDTO dtDTO;
         private void cboDoanhThu_SelectedValueChanged(object sender, EventArgs e)
         {
             lblDoanhThu.Text = "Biểu Đồ Doanh Thu " + cboDoanhThu.SelectedItem.ToString();
             chartDoanhThu.Series.Clear();
-            chartDoanhThu.Series.Add("Doanh Thu");
-            chartDoanhThu.Series["Doanh Thu"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            chartDoanhThu.Series["Doanh Thu"].Font = new Font("UTM Avo", 10, FontStyle.Bold);
-            chartDoanhThu.Series["Doanh Thu"].BorderColor = Color.Orange;
-            chartDoanhThu.Series["Doanh Thu"].BorderWidth = 2;
 
-            List<DoanhThuDTO> lstdt = new List<DoanhThuDTO>();
-            double doanhthu = 0;
-            DoanhThuDTO dtDTO;
+            var series = chartDoanhThu.Series.Add("Doanh Thu");
+            series.ChartType = SeriesChartType.Bar;
+            series.Font = new Font("UTM Avo", 10, FontStyle.Bold);
+            series.BorderColor = Color.Orange;
+            series.BorderWidth = 2;
+            chartDoanhThu.ChartAreas[0].AxisX.Interval = 1; // Đảm bảo mỗi điểm hiển thị cách đều
+            chartDoanhThu.ChartAreas[0].AxisX.IsMarginVisible = true; // Hiển thị khoảng cách giữa các cột
+            chartDoanhThu.Series["Doanh Thu"].IsXValueIndexed = true; // Sắp xếp giá trị X theo thứ tự
+
+            List<DoanhThuDTO> revenueData = new List<DoanhThuDTO>();
             switch (cboDoanhThu.SelectedItem.ToString())
             {
+
                 case "Hôm nay":
-                    doanhthu = TrangChuBL.GetInstance.GetDoanhThuHomNay();
-                    chartDoanhThu.Series["Doanh Thu"].Points.Add(doanhthu);
-                    chartDoanhThu.Series["Doanh Thu"].Points[0].AxisLabel = DateTime.Now.ToShortDateString();
-                    chartDoanhThu.Series["Doanh Thu"].Points[0].LegendText = DateTime.Now.ToShortDateString();
-                    chartDoanhThu.Series["Doanh Thu"].Points[0].LabelForeColor = Color.OrangeRed;
-                    chartDoanhThu.Series["Doanh Thu"].Points[0].Label = Convert(doanhthu).ToString() + " ₫";
+                    double todayRevenue = TrangChuBL.GetInstance.GetDoanhThuHomNay();
+                    revenueData.Add(new DoanhThuDTO { ngay = DateTime.Now, doanhthu = todayRevenue });
                     break;
                 case "Hôm qua":
-                    dtDTO = TrangChuBL.GetInstance.GetDoanhThuHomQua();
-                    if (dtDTO != null)
-                    {
-                        chartDoanhThu.Series["Doanh Thu"].Points.Add(dtDTO.doanhthu);
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].AxisLabel = dtDTO.ngay.ToShortDateString();
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].LegendText = DateTime.Now.ToShortDateString();
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].LabelForeColor = Color.OrangeRed;
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].Label = Convert(dtDTO.doanhthu).ToString() + " ₫";
-                    }
-                    else
-                    {
-                        chartDoanhThu.Series["Doanh Thu"].Points.Add(0);
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].LabelForeColor = Color.OrangeRed;
-                        chartDoanhThu.Series["Doanh Thu"].Points[0].Label = "0 ₫";
-                    }
+                    var yesterday = TrangChuBL.GetInstance.GetDoanhThuHomQua();
+                    revenueData.Add(yesterday ?? new DoanhThuDTO { ngay = DateTime.Now.AddDays(-1), doanhthu = 0 });
                     break;
                 case "7 ngày qua":
                     lstdt = TrangChuBL.GetInstance.GetDoanhThu7NgayQua();
+
                     if (lstdt.Count > 0)
                     {
                         int n = 0;
@@ -126,6 +114,7 @@ namespace DONGHO.Usercontrols
                         chartDoanhThu.Series["Doanh Thu"].Points[0].Label = "0 ₫";
                     }
                     break;
+
                 case "Tháng này":
                     lstdt = TrangChuBL.GetInstance.GetDoanhThuThangNay();
                     if (lstdt.Count > 0)
@@ -151,6 +140,7 @@ namespace DONGHO.Usercontrols
                     break;
                 case "Tháng trước":
                     lstdt = TrangChuBL.GetInstance.GetDoanhThuThangTruoc();
+                    
                     if (lstdt.Count > 0)
                     {
                         int n = 0;
@@ -174,6 +164,14 @@ namespace DONGHO.Usercontrols
                     break;
                 default:
                     break;
+            }
+
+            for (int i = 0; i < revenueData.Count; i++)
+            {
+                var point = series.Points.Add(revenueData[i].doanhthu);
+                series.Points[i].AxisLabel = revenueData[i].ngay.ToShortDateString();
+                series.Points[i].LabelForeColor = Color.OrangeRed;
+                series.Points[i].Label = $"{revenueData[i].doanhthu:N0} ₫";
             }
         }
 

@@ -253,9 +253,10 @@
             panel9.Controls.Add(lblPageNumber);
             panel9.Controls.Add(btnNext);
             panel9.Controls.Add(btnPre);
+            panel9.Dock = DockStyle.Fill;
             panel9.Location = new Point(3, 38);
             panel9.Name = "panel9";
-            panel9.Size = new Size(737, 514);
+            panel9.Size = new Size(738, 514);
             panel9.TabIndex = 1;
             // 
             // lblPageNumber

@@ -35,6 +35,7 @@
             btnWareHouse = new Button();
             btnSettings = new Button();
             btnViewSales = new Button();
+            btnNhanVien = new Button();
             btnUsers = new Button();
             btnExpense = new Button();
             btnPurchase = new Button();
@@ -70,6 +71,7 @@
             panelLeft.Controls.Add(btnWareHouse);
             panelLeft.Controls.Add(btnSettings);
             panelLeft.Controls.Add(btnViewSales);
+            panelLeft.Controls.Add(btnNhanVien);
             panelLeft.Controls.Add(btnUsers);
             panelLeft.Controls.Add(btnExpense);
             panelLeft.Controls.Add(btnPurchase);
@@ -98,11 +100,11 @@
             btnWareHouse.ForeColor = Color.White;
             btnWareHouse.Image = DONGHO.Properties.Resources.Settings1;
             btnWareHouse.ImageAlign = ContentAlignment.MiddleLeft;
-            btnWareHouse.Location = new Point(4, 617);
+            btnWareHouse.Location = new Point(5, 617);
             btnWareHouse.Name = "btnWareHouse";
             btnWareHouse.Size = new Size(258, 60);
             btnWareHouse.TabIndex = 2;
-            btnWareHouse.Text = "    Cài đặt";
+            btnWareHouse.Text = "    Kho";
             btnWareHouse.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnWareHouse.UseVisualStyleBackColor = true;
             btnWareHouse.Click += btnWareHouse_Click;
@@ -139,6 +141,23 @@
             btnViewSales.Text = "     Xem doanh số";
             btnViewSales.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnViewSales.UseVisualStyleBackColor = true;
+            // 
+            // btnNhanVien
+            // 
+            btnNhanVien.FlatAppearance.BorderSize = 0;
+            btnNhanVien.FlatStyle = FlatStyle.Flat;
+            btnNhanVien.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnNhanVien.ForeColor = Color.White;
+            btnNhanVien.Image = DONGHO.Properties.Resources.Customer1;
+            btnNhanVien.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNhanVien.Location = new Point(5, 683);
+            btnNhanVien.Name = "btnNhanVien";
+            btnNhanVien.Size = new Size(258, 60);
+            btnNhanVien.TabIndex = 2;
+            btnNhanVien.Text = "    Nhân Viên";
+            btnNhanVien.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnNhanVien.UseVisualStyleBackColor = true;
+            btnNhanVien.Click += btnNhanVien_Click;
             // 
             // btnUsers
             // 
@@ -375,6 +394,7 @@
             // 
             // timer1
             // 
+            timer1.Interval = 30;
             timer1.Tick += Timer1_Tick;
             // 
             // timerTime
@@ -446,5 +466,6 @@
         private ContextMenuStrip contextMenuStrip1;
         private Panel panelControls;
         private Button btnWareHouse;
+        private Button btnNhanVien;
     }
 }

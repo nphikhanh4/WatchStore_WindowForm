@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
+using System.Diagnostics;
 
 
 namespace DONGHO.Usercontrols
@@ -971,8 +972,13 @@ namespace DONGHO.Usercontrols
 
         private void LoadDanhSachSanPhamTheoBoLoc(int numpage)
         {
-            currentPage = numpage;
+            if (panel9.Width >= 800)
+                itemsPerPage = 8;
+            else itemsPerPage = 6;
+            Debug.WriteLine($"panel9.Width: {panel9.Width}, itemsPerPage: {itemsPerPage}");
 
+
+            currentPage = numpage;
             int customerId = 0;
             flowLayout.Controls.Clear();
 
@@ -1004,7 +1010,7 @@ namespace DONGHO.Usercontrols
 
                 Panel panel = new Panel
                 {
-                    Width = 230,
+                    Width = 220,
                     Height = 225,
                     BorderStyle = BorderStyle.FixedSingle,
                     BackColor = Color.Pink,
@@ -1037,7 +1043,7 @@ namespace DONGHO.Usercontrols
 
                 Label lblPrice = new Label
                 {
-                    Text = "Price: $" + price.ToString("F2"), // Hiển thị giá với 2 chữ số thập phân
+                    Text = "Price: $" + price.ToString(), // Hiển thị giá với 2 chữ số thập phân
                     AutoSize = true,
                     ForeColor = Color.FromArgb(255, 218, 165, 32),
                     Font = new Font("Arial", 14, FontStyle.Regular),

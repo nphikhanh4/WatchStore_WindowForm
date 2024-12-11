@@ -477,6 +477,7 @@
             // 
             chartArea1.Name = "ChartArea1";
             chartTopSP.ChartAreas.Add(chartArea1);
+            chartTopSP.Dock = DockStyle.Fill;
             legend1.Name = "Legend1";
             chartTopSP.Legends.Add(legend1);
             chartTopSP.Location = new Point(677, 52);
@@ -485,7 +486,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             chartTopSP.Series.Add(series1);
-            chartTopSP.Size = new Size(375, 375);
+            chartTopSP.Size = new Size(668, 438);
             chartTopSP.TabIndex = 9;
             chartTopSP.Text = "chart1";
             // 
@@ -493,15 +494,17 @@
             // 
             chartArea2.Name = "ChartArea1";
             chartDoanhThu.ChartAreas.Add(chartArea2);
+            chartDoanhThu.Dock = DockStyle.Fill;
             legend2.Name = "Legend1";
             chartDoanhThu.Legends.Add(legend2);
             chartDoanhThu.Location = new Point(3, 52);
             chartDoanhThu.Name = "chartDoanhThu";
+            chartDoanhThu.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             chartDoanhThu.Series.Add(series2);
-            chartDoanhThu.Size = new Size(375, 375);
+            chartDoanhThu.Size = new Size(668, 438);
             chartDoanhThu.TabIndex = 10;
             chartDoanhThu.Text = "chart2";
             // 

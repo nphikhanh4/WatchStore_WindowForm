@@ -100,5 +100,10 @@ namespace BusinessLogicLayer
         {
             return TrangChuDL.GetInstance.GetDoanhThuThangTruoc();
         }
+
+        public List<DoanhThuDTO> GetDoanhThuByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return TrangChuDL.GetInstance.GetDoanhThuByDateRange(startDate, endDate);
+        }
     }
 }

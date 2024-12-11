@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="BrandBL.cs" />
     <Compile Include="CategoryBL.cs" />
+    <Compile Include="KhachHangBL.cs" />
+    <Compile Include="NhanvienBL.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SanPhamBL.cs" />
+    <Compile Include="SignupBL.cs" />
     <Compile Include="SupplierBL.cs" />
     <Compile Include="SupplierProductBL.cs" />
     <Compile Include="TrangChuBL.cs" />
