@@ -161,7 +161,7 @@ namespace DONGHO.Usercontrols
                     return;
                 }
                 string imageFileName = Path.GetFileName(selectedImagePath);
-            
+
                 string targetPath = Path.Combine(@"D:\WINFORM - master\WINFORM - master\vidu\Resources\", imageFileName); // Đường dẫn tới thư mục lưu ảnh
                 File.Copy(selectedImagePath, targetPath, true); // Sao chép ảnh vào thư mục
 
@@ -325,6 +325,20 @@ namespace DONGHO.Usercontrols
         private void txtPass_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp"; // Hạn chế loại file
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Lưu đường dẫn ảnh vào biến selectedImagePath
+                selectedImagePath = openFileDialog.FileName;
+
+                // Hiển thị ảnh lên PictureBox (tùy chọn)
+                picHinhAnh.Image = Image.FromFile(selectedImagePath);
+            }
         }
     }
 }

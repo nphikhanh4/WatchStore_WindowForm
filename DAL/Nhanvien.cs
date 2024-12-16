@@ -52,7 +52,7 @@ namespace DAL
         {
             try
             {
-                string sql = "SELECT * FROM Admin WHERE Adminname LIKE @SearchText OR Role LIKE %" + searchText + "%";
+                string sql = "SELECT * FROM Admin WHERE Adminname LIKE '%" + searchText + "%' OR Role LIKE '%" + searchText + "%'";
                
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;

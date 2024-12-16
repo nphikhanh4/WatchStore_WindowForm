@@ -173,6 +173,7 @@
             button3.TabIndex = 81;
             button3.Text = "Chọn ảnh";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // picHinhAnh
             // 
@@ -523,13 +524,14 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 61;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(27, 12);
+            label7.Location = new Point(5, 11);
             label7.Margin = new Padding(5, 0, 5, 0);
             label7.Name = "label7";
             label7.Size = new Size(154, 25);
@@ -711,10 +713,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.TextBox txtTenKH;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -744,5 +742,9 @@
         private PictureBox picHinhAnh;
         private Button button3;
         private Button btnLamMoi;
+        private Panel panel7;
+        private PictureBox pictureBox2;
+        private Label label7;
+        private TextBox txtTenKH;
     }
 }

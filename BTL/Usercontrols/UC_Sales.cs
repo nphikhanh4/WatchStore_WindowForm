@@ -271,7 +271,6 @@ namespace DONGHO.Usercontrols
             if (customerId != 0)
             {
                 addOrderItem(customerId, int.Parse(productId), price);
-                //MessageBox.Show("Added.");
             }
             else
             {
@@ -551,8 +550,8 @@ namespace DONGHO.Usercontrols
                                         productExists = true;
                                         // Nếu sản phẩm đã có trong giỏ, cập nhật số lượng và tổng tiền
                                         int currentQuantity = (int)row.Cells["SoLuong"].Value;
-                                        row.Cells["SoLuong"].Value = currentQuantity + quantity;
-                                        row.Cells["TongTien"].Value = (currentQuantity + quantity) * unitPrice;
+                                        row.Cells["SoLuong"].Value = quantity;
+                                        row.Cells["TongTien"].Value = quantity * unitPrice;
                                         break;
                                     }
                                 }
@@ -933,6 +932,13 @@ namespace DONGHO.Usercontrols
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            btnThanhToan.Enabled = false;
+            btnThanhToan.BackColor = Color.Gray;
+            txtTienThua.Text = "";
+            txtTienKHTra.Text = "";
+            lblTongTien.Text = "0";
+            checkOrder();
+
         }
 
         private void txtTienKHTra_TextChanged(object sender, EventArgs e)
@@ -1073,6 +1079,7 @@ namespace DONGHO.Usercontrols
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
+            lblTongTien.Text = "0";
             int customerId = getCustomerId();
             updateOrderStatus(customerId, -1);
             checkOrder();
