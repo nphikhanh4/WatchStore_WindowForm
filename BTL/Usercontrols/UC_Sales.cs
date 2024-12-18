@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using System.Diagnostics;
+using SystemImage = System.Drawing.Image;
+using SystemFont = System.Drawing.Font;
+
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 
 namespace DONGHO.Usercontrols
@@ -107,11 +112,11 @@ namespace DONGHO.Usercontrols
             tableLayoutPanel4.Controls.Add(panel9);
         }
 
-        private Image ResizeImage(string imagePath, int width, int height)
+        private SystemImage ResizeImage(string imagePath, int width, int height)
         {
             try
             {
-                Image img = Image.FromFile(imagePath);
+                SystemImage img = SystemImage.FromFile(imagePath);
                 Bitmap resizedImage = new Bitmap(img, new Size(width, height));
                 img.Dispose();
                 return resizedImage;
@@ -122,7 +127,7 @@ namespace DONGHO.Usercontrols
             }
         }
 
-        private async Task<Image> LoadImageAsync(string imagePath)
+        private async Task<SystemImage> LoadImageAsync(string imagePath)
         {
             return await Task.Run(() =>
             {
@@ -207,7 +212,7 @@ namespace DONGHO.Usercontrols
                         {
                             Text = row["ProductName"].ToString(),
                             AutoSize = true,
-                            Font = new Font("Arial", 9, FontStyle.Bold),
+                            Font = new SystemFont("Arial", 9, FontStyle.Bold),
                             Location = new Point(13, 190)
                         };
 
@@ -216,7 +221,7 @@ namespace DONGHO.Usercontrols
                             Text = "Price: $" + row["Price"].ToString(),
                             AutoSize = true,
                             ForeColor = Color.FromArgb(255, 218, 165, 32),
-                            Font = new Font("Arial", 14, FontStyle.Regular),
+                            Font = new SystemFont("Arial", 14, FontStyle.Regular),
                             Location = new Point(10, 210),
                         };
 
@@ -467,7 +472,7 @@ namespace DONGHO.Usercontrols
 
                             string updateQuantityQuery = @"
                                 UPDATE OrderItem 
-                                SET Quantity = @NewQuantity 
+                                SET Quantity = @NewQuantity
                                 WHERE OrderID = @OrderID 
                                 AND ProductID = @ProductID;";
 
@@ -541,7 +546,6 @@ namespace DONGHO.Usercontrols
                                 int discount = (int)reader["KM"];
                                 decimal totalPrice = (decimal)reader["TongTien"];
 
-                                // Kiểm tra xem sản phẩm đã có trong DataGridView chưa
                                 bool productExists = false;
                                 foreach (DataGridViewRow row in dgvCTHD.Rows)
                                 {
@@ -551,15 +555,14 @@ namespace DONGHO.Usercontrols
                                         // Nếu sản phẩm đã có trong giỏ, cập nhật số lượng và tổng tiền
                                         int currentQuantity = (int)row.Cells["SoLuong"].Value;
                                         row.Cells["SoLuong"].Value = quantity;
-                                        row.Cells["TongTien"].Value = quantity * unitPrice;
+                                        row.Cells["TongTien"].Value = ((quantity * unitPrice) * (100 - discount) /100).ToString("N0") ;
+                                        MessageBox.Show("aaa");
                                         break;
                                     }
                                 }
-
-                                // Nếu sản phẩm chưa có, thêm dòng mới
                                 if (!productExists)
                                 {
-                                    dgvCTHD.Rows.Add(productName, unitPrice, discount, quantity, totalPrice);
+                                    dgvCTHD.Rows.Add(productName, unitPrice.ToString("N0"), discount, quantity, totalPrice.ToString("N0"));
                                 }
                             }
                         }
@@ -592,9 +595,10 @@ namespace DONGHO.Usercontrols
                         UpdateQuantity(orderId, productId, currentQuantity - 1);
                         dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity - 1;
 
-                        decimal unitPrice = (decimal)dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value;
+                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())  
+                            * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
                         decimal newTotalPrice = unitPrice * (currentQuantity - 1);
-                        dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice;
+                        dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
                     }
                     else
                     {
@@ -608,9 +612,10 @@ namespace DONGHO.Usercontrols
                     UpdateQuantity(orderId, productId, currentQuantity + 1);
                     dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity + 1;
 
-                    decimal unitPrice = (decimal)dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value;
+                    decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
+                            * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
                     decimal newTotalPrice = unitPrice * (currentQuantity + 1);
-                    dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice;
+                    dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
 
                     updateUnitPrice(orderId, unitPrice, productId);
                 }
@@ -688,7 +693,7 @@ namespace DONGHO.Usercontrols
                         SELECT OrderID 
                         FROM [Order] 
                         WHERE CustomerID = @CustomerID 
-                        AND (OrderStatus = 0 OR OrderStatus IS NULL);";
+                        AND (OrderStatus = 0 OR OrderStatus = 2 OR OrderStatus IS NULL);";
 
                 using (SqlCommand checkOrderCommand = new SqlCommand(checkOrderQuery, connection))
                 {
@@ -924,9 +929,9 @@ namespace DONGHO.Usercontrols
                 string totalPriceText = lblTongTien.Text.Replace(" đ", "").Replace(",", "").Trim();
                 decimal totalPrice = decimal.Parse(totalPriceText);
 
-                txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0") + " đ";
+                txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0");
                 updateTotalPrice(customerId, totalPrice);
-                updateOrderStatus(customerId, 1);
+                updateOrderStatus(customerId, 2);
             }
             catch (Exception ex)
             {
@@ -937,13 +942,21 @@ namespace DONGHO.Usercontrols
             txtTienThua.Text = "";
             txtTienKHTra.Text = "";
             lblTongTien.Text = "0";
-            checkOrder();
-
+            inHoaDon();
         }
 
         private void txtTienKHTra_TextChanged(object sender, EventArgs e)
         {
             string input = txtTienKHTra.Text.Replace(",", "").Trim();
+
+            if (string.IsNullOrWhiteSpace(txtTienKHTra.Text))
+            {
+                label11.Visible = false;
+            }
+            else
+            {
+                label11.Visible = true;
+            }
 
             if (decimal.TryParse(input, out decimal paidAmount))
             {
@@ -957,7 +970,8 @@ namespace DONGHO.Usercontrols
 
                 if (successful)
                 {
-                    txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0") + " đ";
+                    txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0");
+                    label13.Visible = true;
                     btnThanhToan.Enabled = true;
                     btnThanhToan.BackColor = Color.Blue;
                 }
@@ -965,16 +979,19 @@ namespace DONGHO.Usercontrols
                 {
                     btnThanhToan.Enabled = false;
                     btnThanhToan.BackColor = Color.Gray;
-                    txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0") + " đ";
+                    txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0");
+                    label13.Visible = true;
                 }
             }
             else
             {
                 txtTienThua.Text = "";
+                label13.Visible = false;
                 btnThanhToan.Enabled = false;
                 btnThanhToan.BackColor = Color.Gray;
             }
         }
+
 
         private void LoadDanhSachSanPhamTheoBoLoc(int numpage)
         {
@@ -1027,41 +1044,86 @@ namespace DONGHO.Usercontrols
                 string brandName = row["BrandName"].ToString();
                 string productId = row["MãSP"].ToString();
                 string productName = row["TênSP"].ToString();
-                string imagePath = Path.Combine(@"D:\LapTrinhTrucQuan\BTL_Store\Content\img\", brandName, productName, productName + @" Default\1.jpg");
+                string discount = row["KhuyenMai"].ToString();
+                string imagePath = Path.Combine(@"D:\BTL_Web\Khanh\Web\WebApplication1\Content\img\", brandName, productName, productName + @".jpg");
+                decimal reducedPrice = price * (100 - int.Parse(discount)) / 100;
 
                 PictureBox pictureBox = new PictureBox()
                 {
-                    Width = 205,
-                    Height = 160,
-                    Padding = new Padding(20, 3, 0, 0),
+                    Width = 185,
+                    Height = 145,
+                    Padding = new Padding(35, 3, 0, 0),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                pictureBox.Image = ResizeImage(imagePath, 205, 185);
+                pictureBox.Image = ResizeImage(imagePath, 185, 145);
 
                 Label lblName = new Label
                 {
                     Text = row["TênSP"].ToString(),
                     AutoSize = true,
-                    Font = new Font("Arial", 10, FontStyle.Bold),
-                    Location = new Point(13, 170)
+                    Font = new SystemFont("Arial", 9, FontStyle.Bold),
+                    Location = new Point(13, 155)
                 };
 
                 Label lblPrice = new Label
                 {
-                    Text = "Price: $" + price.ToString(), // Hiển thị giá với 2 chữ số thập phân
+                    Text = "Price: $" + reducedPrice.ToString("N0"), 
                     AutoSize = true,
                     ForeColor = Color.FromArgb(255, 218, 165, 32),
-                    Font = new Font("Arial", 14, FontStyle.Regular),
-                    Location = new Point(10, 190),
+                    Font = new SystemFont("Arial", 13, FontStyle.Regular),
+                    Location = new Point(10, 175),
                 };
+
+                Label lblRealPrice = new Label
+                {
+                    Text = price.ToString("N0"),
+                    AutoSize = true,
+                    ForeColor = Color.Gray,
+                    Font = new SystemFont("Arial", 12, FontStyle.Regular),
+                    Location = new Point(20, 200),
+                };
+                lblRealPrice.Paint += (sender, e) =>
+                {
+                    Label label = sender as Label;
+                    if (label != null)
+                    {
+                        Size textSize = TextRenderer.MeasureText(label.Text, label.Font);
+                        int lineY = textSize.Height / 2 + label.Padding.Top;
+
+                        e.Graphics.DrawLine(new Pen(Color.Gray), 0, lineY, textSize.Width, lineY);
+                    }
+                };
+
+                Label lblDiscount = null;
+
+                if (discount != "0")
+                {
+                    lblDiscount = new Label
+                    {
+                        Text = "-" + discount + "%",
+                        Width = 40,
+                        Height = 25,
+                        Location = new Point(180, 0),
+                        BackColor = Color.Red,
+                        Font = new SystemFont("Arial", 8, FontStyle.Regular),
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                }
+
 
                 panel.Controls.Add(pictureBox);
                 panel.Controls.Add(lblName);
                 panel.Controls.Add(lblPrice);
+                if (lblDiscount != null) // Kiểm tra nếu lblDiscount được khởi tạo
+                {
+                    panel.Controls.Add(lblDiscount);
+                    lblDiscount.BringToFront();
+                    panel.Controls.Add(lblRealPrice);
 
-                AddClickEventToPanelControls(panel, customerId, productId, price);
+                }
 
+                AddClickEventToPanelControls(panel, customerId, productId, reducedPrice);
                 flowLayout.Controls.Add(panel);
             }
         }
@@ -1083,6 +1145,119 @@ namespace DONGHO.Usercontrols
             int customerId = getCustomerId();
             updateOrderStatus(customerId, -1);
             checkOrder();
+        }
+        private void inHoaDon()
+        {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 10f, 10f, 10f, 10f);
+            iTextSharp.text.pdf.PdfWriter.GetInstance(document, new FileStream("D:/HoaDon.pdf", FileMode.Create));
+            document.Open();
+            string fontPath = @"C:\Windows\Fonts\tahoma.ttf";
+            BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            iTextSharp.text.Font vietnameseFont = new iTextSharp.text.Font(baseFont, 12);
+
+
+            iTextSharp.text.Font headerFont = new iTextSharp.text.Font(baseFont, 20, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Paragraph header = new iTextSharp.text.Paragraph("HÓA ĐƠN BÁN HÀNG", headerFont);
+            header.Alignment = Element.ALIGN_CENTER;
+            document.Add(header);
+
+            iTextSharp.text.Paragraph dashedLine = new iTextSharp.text.Paragraph("-------------------------------------------", vietnameseFont);
+            dashedLine.Alignment = Element.ALIGN_CENTER;
+            document.Add(dashedLine);
+
+
+            iTextSharp.text.Paragraph date = new iTextSharp.text.Paragraph($"Ngày lập: {DateTime.Now:dd/MM/yyyy HH:mm}", vietnameseFont);
+            date.Alignment = Element.ALIGN_RIGHT;
+            document.Add(date);
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(new iTextSharp.text.Paragraph("Cửa hàng: Watch Store", vietnameseFont));
+            document.Add(new iTextSharp.text.Paragraph("Địa chỉ: 450-451 Lê Văn Việt, Phường Tăng Nhơn Phú A, Hồ Chí Minh, Việt Nam", vietnameseFont));
+            document.Add(new iTextSharp.text.Paragraph("Nhân viên: Nguyễn Văn A", vietnameseFont));
+
+            document.Add(dashedLine);
+
+            DataTable dt = KhachHangBL.GetInstance.GetCustomerById(getCustomerId());
+            string printName = "Khách hàng: ";
+            string printPhone = "Số điện thoại: ";
+            string printAddress = "Địa chỉ: ";
+            int cusID = 0;
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                printName += row["FullName"].ToString();
+                printPhone += row["Phone"].ToString();
+                printAddress += row["Address"].ToString();
+                cusID = int.Parse(row["CustomerID"].ToString()) ;
+            }
+            else Console.WriteLine("Ko tìm thấy customer.");
+
+            document.Add(new iTextSharp.text.Paragraph(printName, vietnameseFont));
+            document.Add(new iTextSharp.text.Paragraph(printPhone, vietnameseFont));
+            document.Add(new iTextSharp.text.Paragraph(printAddress, vietnameseFont));
+
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(4);
+            table.WidthPercentage = 100;
+
+            table.AddCell(new iTextSharp.text.Phrase("STT", vietnameseFont));
+            table.AddCell(new iTextSharp.text.Phrase("Tên sản phẩm", vietnameseFont));
+            table.AddCell(new iTextSharp.text.Phrase("Số lượng", vietnameseFont));
+            table.AddCell(new iTextSharp.text.Phrase("Giá (VND)", vietnameseFont));
+
+            DataTable pd = ProductBL.GetInstance.GetProductToPrint(getCustomerId());
+            int i =  1;
+            decimal total = pd.AsEnumerable()
+                  .Sum(row => row.Field<decimal?>("SubPrice") ?? 0);
+
+            foreach (DataRow row in pd.Rows)
+            {
+                table.AddCell(new iTextSharp.text.Phrase(i.ToString(), vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase(row["ProductName"].ToString(), vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase(Convert.ToInt32(row["Quantity"]).ToString(), vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase(Convert.ToDecimal(row["SubPrice"]).ToString("N0"), vietnameseFont));
+                i++;
+            }
+
+            iTextSharp.text.pdf.PdfPCell totalCell = new iTextSharp.text.pdf.PdfPCell(new iTextSharp.text.Phrase("Tổng cộng", vietnameseFont));
+            totalCell.Colspan = 3;
+            totalCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            table.AddCell(totalCell);
+            table.AddCell(new iTextSharp.text.Phrase(total.ToString("N0"), vietnameseFont));
+
+            document.Add(table);
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+            document.Add(new iTextSharp.text.Paragraph("\n"));
+
+            document.Add(dashedLine);
+
+            iTextSharp.text.Font thankFont = new iTextSharp.text.Font(baseFont, 14, iTextSharp.text.Font.ITALIC);
+            iTextSharp.text.Paragraph thank = new iTextSharp.text.Paragraph($"Cảm ơn quý khách đã mua hàng ở Watch Store\nChúc quý khách một ngày tốt lành!", thankFont);
+            thank.Alignment = Element.ALIGN_CENTER;
+            document.Add(thank);
+            document.Close();
+
+            MessageBox.Show("Hóa đơn PDF đã được tạo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            updateOrderStatus(cusID, 1);
+            checkOrder();
+
+            try
+            {
+                var processInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "D:/HoaDon.pdf", // File path
+                    UseShellExecute = true      // Required to open with default application
+                };
+                System.Diagnostics.Process.Start(processInfo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Không thể mở file PDF. Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -130,5 +130,22 @@ namespace DAL
             return DataProvider.ExecuteCommand(query, parameters);
         }
         #endregion
+
+        public DataTable GetCustomerById(int id)
+        {
+            string sql = @"SELECT [CustomerID]
+                                  ,[FullName]
+                                  ,[ImgCustomer]
+                                  ,[Email]
+                                  ,[CreatedAt]
+                                  ,[Password]
+                                  ,[Phone]
+                                  ,[Gender]
+                                  ,[Address]
+                           FROM [WatchStore].[dbo].[Customer]
+                           Where CustomerID = " + id; 
+                DataTable dt = DataProvider.GetTable(sql);
+                return dt;
+        }
     }
 }

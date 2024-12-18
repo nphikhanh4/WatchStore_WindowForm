@@ -256,3 +256,5 @@ D:\BTL_W\BTL_W\BTL\bin\Debug\net8.0-windows\DONGHO.pdb
 D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\DONGHO.csproj.Up2Date
 D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\DONGHO.genruntimeconfig.cache
 D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\ref\DONGHO.dll
+D:\BTL_W\BTL_W\BTL\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+D:\BTL_W\BTL_W\BTL\bin\Debug\net8.0-windows\itextsharp.dll

@@ -414,5 +414,18 @@ namespace DataAccessLayer
             }
         }
         #endregion
+
+        public DataTable GetProductToPrint(int id)
+        {
+            string sql =
+                @"SELECT pd.ProductName as ProductName,  oi.Quantity as Quantity, oi.Quantity*oi.UnitPrice as SubPrice, od.TotalPrice as TotalPrice
+                FROM [OrderItem] as oi
+                join Product as pd on pd.ProductID = oi.ProductID
+                join [Order] as od on od.OrderID = oi.OrderID
+                join Customer as cus on cus.CustomerID = od.CustomerID
+                where cus.CustomerID = " + id + " and od.OrderStatus = 2";
+            DataTable dt = DataProvider.GetTable(sql);
+            return dt;
+        }
     }
 }

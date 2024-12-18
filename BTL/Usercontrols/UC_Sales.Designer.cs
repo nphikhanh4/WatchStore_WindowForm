@@ -51,6 +51,8 @@
             btnPre = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             pnlThongTinSanPham = new Panel();
+            label13 = new Label();
+            label11 = new Label();
             txtTienThua = new TextBox();
             label9 = new Label();
             txtTienKHTra = new TextBox();
@@ -326,6 +328,8 @@
             // pnlThongTinSanPham
             // 
             pnlThongTinSanPham.BackColor = Color.White;
+            pnlThongTinSanPham.Controls.Add(label13);
+            pnlThongTinSanPham.Controls.Add(label11);
             pnlThongTinSanPham.Controls.Add(txtTienThua);
             pnlThongTinSanPham.Controls.Add(label9);
             pnlThongTinSanPham.Controls.Add(txtTienKHTra);
@@ -341,6 +345,27 @@
             pnlThongTinSanPham.Name = "pnlThongTinSanPham";
             pnlThongTinSanPham.Size = new Size(596, 514);
             pnlThongTinSanPham.TabIndex = 55;
+            // 
+            // label13
+            // 
+            label13.Font = new Font("Microsoft Sans Serif", 14.25F);
+            label13.ForeColor = SystemColors.ActiveBorder;
+            label13.Location = new Point(484, 400);
+            label13.Name = "label13";
+            label13.Size = new Size(40, 34);
+            label13.TabIndex = 62;
+            label13.Text = "đ";
+            label13.Visible = false;
+            // 
+            // label11
+            // 
+            label11.Font = new Font("Microsoft Sans Serif", 14.25F);
+            label11.Location = new Point(484, 353);
+            label11.Name = "label11";
+            label11.Size = new Size(40, 34);
+            label11.TabIndex = 62;
+            label11.Text = "đ";
+            label11.Visible = false;
             // 
             // txtTienThua
             // 
@@ -925,5 +950,7 @@
         private DataGridViewTextBoxColumn TongTien;
         private DataGridViewButtonColumn Xoa;
         private DataGridViewButtonColumn Them;
+        private Label label11;
+        private Label label13;
     }
 }

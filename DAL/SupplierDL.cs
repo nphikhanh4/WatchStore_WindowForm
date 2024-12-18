@@ -57,7 +57,7 @@ namespace DAL
             try
             {
                 DataTable dt = new DataTable();
-                string sql = "SELECT SupplierId ,SupplierName ,Address AS N'Địa Chỉ NCC',Phone AS N'SĐT',Email AS 'Email' FROM Supplier";
+                string sql = "SELECT SupplierId ,SupplierName ,Address AS N'Địa Chỉ NCC',Phone AS N'SĐT',Email AS 'Email' FROM Supplier where check_Remove = 1";
                 dt = DataProvider.GetTable(sql);
                 return dt;
             }

@@ -24,14 +24,7 @@ namespace BusinessLogicLayer
             }
         }
         private ProductBL() { }
-        //public int GetTongSanPhamDaBan()
-        //{
-        //    return ProductDL.GetInstance.GetTongSanPhamDaBan();
-        //}
-        //public int GetMaSPMoi()
-        //{
-        //    return ProductDL.GetInstance.GetMaSPMax() + 1;
-        //}
+
         public string GetTenSP(int MASP)
         {
             return ProductDL.GetInstance.GetTenSP(MASP);
@@ -40,22 +33,10 @@ namespace BusinessLogicLayer
         {
             return ProductDL.GetInstance.GetDanhSachSanPhamTheoNCC(MANCC);
         }
-        //public bool CheckMaSP(string MASP)
-        //{
-        //    return ProductDL.GetInstance.CheckMaSP(MASP);
-        //}
         public bool NgungKinhDoanhSanPham(string MASP)
         {
             return ProductDL.GetInstance.NgungKinhDoanhSanPham(MASP);
         }
-        //public bool ThemSanPham(ProductDTO spDTO)
-        //{
-        //    return ProductDL.GetInstance.ThemSanPham(spDTO);
-        //}
-        //public bool SuaSanPham(ProductDTO spDTO)
-        //{
-        //    return ProductDL.GetInstance.SuaSanPham(spDTO);
-        //}
         public DataTable GetDanhSachSanPhamTheoBoLoc(string TENSP, string MALOAISP, string MANCC)
         {
             return ProductDL.GetInstance.GetDanhSachSanPhamTheoBoLoc(TENSP, MALOAISP, MANCC);
@@ -80,13 +61,13 @@ namespace BusinessLogicLayer
         {
             return ProductDL.GetInstance.GetTongKhachHang();
         }
-        //public List<ProductDTO> GetTop10SP(int top)
-        //{
-        //    return ProductDL.GetInstance.GetTop10SP(top);
-        //}
         public double GetDoanhThuHomNay()
         {
             return ProductDL.GetInstance.GetDoanhThuHomNay();
+        }
+        public DataTable GetProductToPrint(int id)
+        {
+            return ProductDL.GetInstance.GetProductToPrint(id);
         }
     }
 }

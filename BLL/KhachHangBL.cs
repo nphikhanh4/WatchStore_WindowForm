@@ -68,5 +68,9 @@ namespace BLL
         }
         #endregion
 
+        public DataTable GetCustomerById(int id)
+        {
+            return KhachHang.GetInstance.GetCustomerById(id);
+        }
     }
 }
