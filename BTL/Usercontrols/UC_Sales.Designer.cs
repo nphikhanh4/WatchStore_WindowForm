@@ -870,6 +870,7 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "UC_Sales";
             Size = new Size(1348, 725);
+            KeyDown += UC_Sales_KeyDown;
             panel5.ResumeLayout(false);
             panel6.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);

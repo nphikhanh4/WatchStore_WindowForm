@@ -142,105 +142,6 @@ namespace DONGHO.Usercontrols
             });
         }
 
-        private async void LoadItemList(int page)
-        {
-            try
-            {
-                flowLayout.Controls.Clear();
-
-                int customerId = 0;
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-
-                    string countQuery = @"
-                        SELECT COUNT(*) 
-                        FROM Product
-                        JOIN Brand ON Brand.BrandID = Product.BrandID";
-
-                    SqlCommand countCommand = new SqlCommand(countQuery, connection);
-
-                    int totalItems = (int)await countCommand.ExecuteScalarAsync();
-                    int totalPages = (int)Math.Ceiling((double)totalItems / itemsPerPage);
-                    btnPre.Enabled = currentPage > 1;
-                    btnNext.Enabled = currentPage < totalPages;
-                    lblPageNumber.Text = $"{currentPage}/{totalPages}";
-
-                    string query = $@"
-                        SELECT 
-                            Product.ProductID, 
-                            Product.ProductName, 
-                            Product.Price, 
-                            Brand.BrandName
-                        FROM Product
-                        JOIN Brand ON Brand.BrandID = Product.BrandID
-                        ORDER BY Product.ProductId
-                        OFFSET {(page - 1) * itemsPerPage} ROWS
-                        FETCH NEXT {itemsPerPage} ROWS ONLY";
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        Panel panel = new Panel
-                        {
-                            Width = 222,
-                            Height = 255,
-                            BorderStyle = BorderStyle.FixedSingle,
-                            Margin = new Padding(5),
-                        };
-
-                        decimal price = (decimal)row["Price"];
-                        string brandName = row["BrandName"].ToString();
-                        string productId = row["ProductID"].ToString();
-                        string productName = row["ProductName"].ToString();
-                        string imagePath = Path.Combine(@"D:\LapTrinhTrucQuan\BTL_Store\Content\img\", brandName, productName, productName + @" Default\1.jpg");
-
-                        PictureBox pictureBox = new PictureBox()
-                        {
-                            Width = 205,
-                            Height = 185,
-                            Padding = new Padding(15, 15, 0, 0),
-                            SizeMode = PictureBoxSizeMode.StretchImage
-                        };
-
-                        pictureBox.Image = await LoadImageAsync(imagePath);
-
-                        Label lblName = new Label
-                        {
-                            Text = row["ProductName"].ToString(),
-                            AutoSize = true,
-                            Font = new SystemFont("Arial", 9, FontStyle.Bold),
-                            Location = new Point(13, 190)
-                        };
-
-                        Label lblPrice = new Label
-                        {
-                            Text = "Price: $" + row["Price"].ToString(),
-                            AutoSize = true,
-                            ForeColor = Color.FromArgb(255, 218, 165, 32),
-                            Font = new SystemFont("Arial", 14, FontStyle.Regular),
-                            Location = new Point(10, 210),
-                        };
-
-                        panel.Controls.Add(pictureBox);
-                        panel.Controls.Add(lblName);
-                        panel.Controls.Add(lblPrice);
-
-                        AddClickEventToPanelControls(panel, customerId, productId, price);
-
-                        flowLayout.Controls.Add(panel);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading data: " + ex.Message);
-            }
-        }
-
         private void AddClickEventToPanelControls(Panel panel, int customerId, string productId, decimal price)
         {
             foreach (Control control in panel.Controls)
@@ -253,9 +154,13 @@ namespace DONGHO.Usercontrols
         private void PanelControl_Click(object sender, EventArgs e, int customerId, string productId, decimal price)
         {
             string sdt = txtSDT.Text;
+            int stockQuantity = 0;
+            int currentItemQuantity = 0;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+
                 string checkPhoneNumberQuery = "SELECT CustomerID FROM Customer WHERE Phone = @PhoneNumber";
                 using (SqlCommand checkPhoneCommand = new SqlCommand(checkPhoneNumberQuery, connection))
                 {
@@ -266,22 +171,63 @@ namespace DONGHO.Usercontrols
                         {
                             customerId = (int)reader["CustomerID"];
                         }
-                        else
-                        {
-                            MessageBox.Show("Phone number not found.");
-                        }
+                    }
+                }
+                string getOrderItemQuantity = "SELECT Quantity FROM OrderItem as oi join [Order] as o on o.OrderID = oi.OrderID WHERE ProductID = @ProductID and OrderStatus = 0";
+                using (SqlCommand getStockCommand = new SqlCommand(getOrderItemQuantity, connection))
+                {
+                    getStockCommand.Parameters.AddWithValue("@ProductID", productId);
+
+                    object result = getStockCommand.ExecuteScalar();
+                    if (result != null)
+                    {
+                        currentItemQuantity = Convert.ToInt32(result);
+                    }
+                }
+
+                string getStockQuery = "SELECT StockQuantity FROM Product WHERE ProductID = @ProductID";
+                using (SqlCommand getStockCommand = new SqlCommand(getStockQuery, connection))
+                {
+                    getStockCommand.Parameters.AddWithValue("@ProductID", productId);
+
+                    object result = getStockCommand.ExecuteScalar();
+                    if (result != null)
+                    {
+                        stockQuantity = Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product not found.");
+                        return;
                     }
                 }
             }
+
             if (customerId != 0)
             {
-                addOrderItem(customerId, int.Parse(productId), price);
+                if (stockQuantity > 0)
+                {
+                    if(currentItemQuantity == stockQuantity)
+                    {
+                        MessageBox.Show("Không đủ.");
+                    }
+
+                    else
+                    {
+                        addOrderItem(customerId, int.Parse(productId), price);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Hết hàng ròi.");
+                }
             }
             else
             {
                 MessageBox.Show("Customer not found. Please check the phone number.");
             }
         }
+
 
         private void btnPre_Click(object sender, EventArgs e)
         {
@@ -421,17 +367,10 @@ namespace DONGHO.Usercontrols
             try
             {
                 int orderId = 0;
-
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
-                    string checkOrderQuery = @"
-                        SELECT OrderID 
-                        FROM [Order] 
-                        WHERE CustomerID = @CustomerID 
-                        AND (OrderStatus = 0 OR OrderStatus IS NULL);";
-
+                    string checkOrderQuery = @" SELECT OrderID FROM [Order] WHERE CustomerID = @CustomerID AND (OrderStatus = 0 OR OrderStatus IS NULL);";
                     using (SqlCommand checkOrderCommand = new SqlCommand(checkOrderQuery, connection))
                     {
                         checkOrderCommand.Parameters.AddWithValue("@CustomerID", customerId);
@@ -452,7 +391,6 @@ namespace DONGHO.Usercontrols
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
                     string checkOrderItemQuery = @"
                         SELECT Quantity 
                         FROM OrderItem 
@@ -488,8 +426,8 @@ namespace DONGHO.Usercontrols
                         else
                         {
                             string insertOrderItemQuery = @"
-                        INSERT INTO OrderItem (OrderID, ProductID, Quantity, UnitPrice)
-                        VALUES (@OrderID, @ProductID, @Quantity, @UnitPrice)";
+                                INSERT INTO OrderItem (OrderID, ProductID, Quantity, UnitPrice)
+                                VALUES (@OrderID, @ProductID, @Quantity, @UnitPrice)";
 
                             using (SqlCommand insertCommand = new SqlCommand(insertOrderItemQuery, connection))
                             {
@@ -555,14 +493,13 @@ namespace DONGHO.Usercontrols
                                         // Nếu sản phẩm đã có trong giỏ, cập nhật số lượng và tổng tiền
                                         int currentQuantity = (int)row.Cells["SoLuong"].Value;
                                         row.Cells["SoLuong"].Value = quantity;
-                                        row.Cells["TongTien"].Value = ((quantity * unitPrice) * (100 - discount) /100).ToString("N0") ;
-                                        MessageBox.Show("aaa");
+                                        row.Cells["TongTien"].Value = ((quantity * unitPrice) * (100 - discount) / 100).ToString("N0");
                                         break;
                                     }
                                 }
                                 if (!productExists)
                                 {
-                                    dgvCTHD.Rows.Add(productName, unitPrice.ToString("N0"), discount, quantity, totalPrice.ToString("N0"));
+                                    dgvCTHD.Rows.Add(productName, unitPrice.ToString("N0"), discount, quantity, totalPrice.ToString("N0"), "-", "+");
                                 }
                             }
                         }
@@ -595,7 +532,7 @@ namespace DONGHO.Usercontrols
                         UpdateQuantity(orderId, productId, currentQuantity - 1);
                         dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity - 1;
 
-                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())  
+                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
                             * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
                         decimal newTotalPrice = unitPrice * (currentQuantity - 1);
                         dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
@@ -609,15 +546,22 @@ namespace DONGHO.Usercontrols
                 // Column 6: Increase quantity
                 else if (e.ColumnIndex == 6)
                 {
-                    UpdateQuantity(orderId, productId, currentQuantity + 1);
-                    dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity + 1;
+                    if(getQuantityByProductId(productId) == currentQuantity)
+                    {
+                        MessageBox.Show("Không đủ số lượng.");
+                    }
+                    else
+                    {
+                        UpdateQuantity(orderId, productId, currentQuantity + 1);
+                        dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity + 1;
 
-                    decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
-                            * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
-                    decimal newTotalPrice = unitPrice * (currentQuantity + 1);
-                    dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
+                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
+                                * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
+                        decimal newTotalPrice = unitPrice * (currentQuantity + 1);
+                        dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
 
-                    updateUnitPrice(orderId, unitPrice, productId);
+                        updateUnitPrice(orderId, unitPrice, productId);
+                    }
                 }
                 CalculateTotalPrice();
             }
@@ -651,6 +595,26 @@ namespace DONGHO.Usercontrols
             }
         }
 
+        private int getQuantityByProductId(int productId)
+        {
+            int stockQuantity = 0;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string getStockQuery = "SELECT StockQuantity FROM Product WHERE ProductID = @ProductID";
+                using (SqlCommand command = new SqlCommand(getStockQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductID", productId);
+                    object result = command.ExecuteScalar();
+
+                    stockQuantity = Convert.ToInt32(result);
+
+                }
+            }
+            return stockQuantity;
+        }
+
         private void UpdateQuantity(int orderId, int productId, int newQuantity)
         {
             try
@@ -658,7 +622,6 @@ namespace DONGHO.Usercontrols
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
                     string updateQuery = @"
                         UPDATE OrderItem 
                         SET Quantity = @NewQuantity 
@@ -919,10 +882,77 @@ namespace DONGHO.Usercontrols
             LoadDanhSachSanPhamTheoBoLoc(1);
         }
 
+        private void updateStockQuantity(int customerId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string fetchOrderItemsQuery = @"
+                SELECT 
+                    oi.ProductID, 
+                    oi.Quantity 
+                FROM OrderItem oi
+                INNER JOIN [Order] o ON oi.OrderID = o.OrderID
+                WHERE o.CustomerID = @CustomerID AND o.OrderStatus = 0";
+
+                    using (SqlCommand fetchCommand = new SqlCommand(fetchOrderItemsQuery, connection))
+                    {
+                        fetchCommand.Parameters.AddWithValue("@CustomerID", customerId);
+                        using (SqlDataReader reader = fetchCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int productId = (int)reader["ProductID"];
+                                int quantity = (int)reader["Quantity"];
+
+                                updateProductStock(productId, quantity);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void updateProductStock(int productId, int quantity)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string updateStockQuery = @"
+                        UPDATE Product
+                        SET StockQuantity = StockQuantity - @Quantity
+                        WHERE ProductID = @ProductID";
+
+                    using (SqlCommand updateCommand = new SqlCommand(updateStockQuery, connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@Quantity", quantity);
+                        updateCommand.Parameters.AddWithValue("@ProductID", productId);
+
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating product stock: " + ex.Message);
+            }
+        }
+
+
+
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
             int customerId = getCustomerId();
-
             try
             {
                 decimal paidAmount = decimal.Parse(txtTienKHTra.Text.Replace(" đ", "").Replace(",", ""));
@@ -931,6 +961,7 @@ namespace DONGHO.Usercontrols
 
                 txtTienThua.Text = CalculateRemainingBalance(paidAmount, totalPrice).ToString("N0");
                 updateTotalPrice(customerId, totalPrice);
+                updateStockQuantity(customerId);
                 updateOrderStatus(customerId, 2);
             }
             catch (Exception ex)
@@ -1043,6 +1074,7 @@ namespace DONGHO.Usercontrols
                 decimal price = row["DonGiaBan"] != DBNull.Value ? Convert.ToDecimal(row["DonGiaBan"]) : 0m;
                 string brandName = row["BrandName"].ToString();
                 string productId = row["MãSP"].ToString();
+                string stockQuantity = row["SoLuong"].ToString();
                 string productName = row["TênSP"].ToString();
                 string discount = row["KhuyenMai"].ToString();
                 string imagePath = Path.Combine(@"D:\BTL_Web\Khanh\Web\WebApplication1\Content\img\", brandName, productName, productName + @".jpg");
@@ -1068,7 +1100,7 @@ namespace DONGHO.Usercontrols
 
                 Label lblPrice = new Label
                 {
-                    Text = "Price: $" + reducedPrice.ToString("N0"), 
+                    Text = "Price: $" + reducedPrice.ToString("N0"),
                     AutoSize = true,
                     ForeColor = Color.FromArgb(255, 218, 165, 32),
                     Font = new SystemFont("Arial", 13, FontStyle.Regular),
@@ -1083,6 +1115,7 @@ namespace DONGHO.Usercontrols
                     Font = new SystemFont("Arial", 12, FontStyle.Regular),
                     Location = new Point(20, 200),
                 };
+
                 lblRealPrice.Paint += (sender, e) =>
                 {
                     Label label = sender as Label;
@@ -1111,10 +1144,26 @@ namespace DONGHO.Usercontrols
                     };
                 }
 
+                string stockQuantityText = "Còn : " + stockQuantity;
+                if (int.Parse(stockQuantity) <= 0)
+                    stockQuantityText = "Hết Hàng!";
+
+                Label StockQuantity = new Label
+                {
+                    Text = stockQuantityText,
+                    AutoSize = true,
+                    ForeColor = Color.Gray,
+                    Font = new SystemFont("Arial", 7, FontStyle.Regular),
+                    Location = new Point(160, 205),
+                };
+
+
 
                 panel.Controls.Add(pictureBox);
                 panel.Controls.Add(lblName);
                 panel.Controls.Add(lblPrice);
+                panel.Controls.Add(StockQuantity);
+
                 if (lblDiscount != null) // Kiểm tra nếu lblDiscount được khởi tạo
                 {
                     panel.Controls.Add(lblDiscount);
@@ -1190,7 +1239,7 @@ namespace DONGHO.Usercontrols
                 printName += row["FullName"].ToString();
                 printPhone += row["Phone"].ToString();
                 printAddress += row["Address"].ToString();
-                cusID = int.Parse(row["CustomerID"].ToString()) ;
+                cusID = int.Parse(row["CustomerID"].ToString());
             }
             else Console.WriteLine("Ko tìm thấy customer.");
 
@@ -1209,7 +1258,7 @@ namespace DONGHO.Usercontrols
             table.AddCell(new iTextSharp.text.Phrase("Giá (VND)", vietnameseFont));
 
             DataTable pd = ProductBL.GetInstance.GetProductToPrint(getCustomerId());
-            int i =  1;
+            int i = 1;
             decimal total = pd.AsEnumerable()
                   .Sum(row => row.Field<decimal?>("SubPrice") ?? 0);
 
@@ -1257,6 +1306,18 @@ namespace DONGHO.Usercontrols
             catch (Exception ex)
             {
                 MessageBox.Show($"Không thể mở file PDF. Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UC_Sales_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                btnThanhToan_Click(sender, e);
+            }
+            else if (e.KeyCode == Keys.F12)
+            {
+                btnHuy_Click(sender, e);
             }
         }
     }
