@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,28 +50,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_Sales.cs [Design]",
-              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
-              "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.cs",
-              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs [Design]*",
-              "RelativeToolTip": "Usercontrols\\UC_Sales.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T10:56:54.241Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "UC_Sales.Designer.cs",
               "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.Designer.cs",
               "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.Designer.cs",
               "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.Designer.cs",
               "RelativeToolTip": "Usercontrols\\UC_Sales.Designer.cs",
-              "ViewState": "AgIAAFQDAAAAAAAAAAAAAGgDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUCAAAAAAAAAAArwBMCAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T10:56:40.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-04T11:00:33.857Z"
             },
             {
               "$type": "Document",
@@ -79,12 +66,23 @@
               "Title": "UC_Sales.cs",
               "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
               "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.cs",
-              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs*",
-              "RelativeToolTip": "Usercontrols\\UC_Sales.cs*",
-              "ViewState": "AgIAAN8BAAAAAAAAAAD4v/UBAACSAAAAAAAAAA==",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
+              "RelativeToolTip": "Usercontrols\\UC_Sales.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgCAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T08:09:01.737Z",
+              "WhenOpened": "2025-01-04T10:21:24.663Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UC_Sales.cs [Design]",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
+              "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs [Design]",
+              "RelativeToolTip": "Usercontrols\\UC_Sales.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T10:21:21.345Z"
             }
           ]
         }

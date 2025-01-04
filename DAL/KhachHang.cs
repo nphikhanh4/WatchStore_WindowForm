@@ -54,7 +54,7 @@ namespace DAL
         {
             try
             {
-                string sql = "SELECT * FROM Customer WHERE FullName LIKE %" + searchText + "%";
+                string sql = "SELECT * FROM Customer WHERE FullName LIKE N'%" + searchText + "%'";
                 
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;

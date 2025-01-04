@@ -207,7 +207,7 @@ namespace DONGHO.Usercontrols
             {
                 if (stockQuantity > 0)
                 {
-                    if(currentItemQuantity == stockQuantity)
+                    if (currentItemQuantity == stockQuantity)
                     {
                         MessageBox.Show("Không đủ.");
                     }
@@ -516,55 +516,63 @@ namespace DONGHO.Usercontrols
         private void dgvCTHD_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int customerId = getCustomerId();
-            string productName = dgvCTHD.Rows[e.RowIndex].Cells["TenSP"].Value.ToString();
 
-            if (e.RowIndex >= 0)
+            // Column 5: Decrease quantity
+            if (e.ColumnIndex == 5)
             {
+                if(e.RowIndex == -1)
+                {
+                    return;
+                }
+                string productName = dgvCTHD.Rows[e.RowIndex].Cells["TenSP"].Value.ToString();
                 int orderId = getOrderId(customerId);
                 int productId = getProductIdByName(productName);
                 int currentQuantity = (int)dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value;
-
-                // Column 5: Decrease quantity
-                if (e.ColumnIndex == 5)
+                if (currentQuantity > 1)
                 {
-                    if (currentQuantity > 1)
-                    {
-                        UpdateQuantity(orderId, productId, currentQuantity - 1);
-                        dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity - 1;
+                    UpdateQuantity(orderId, productId, currentQuantity - 1);
+                    dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity - 1;
 
-                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
-                            * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
-                        decimal newTotalPrice = unitPrice * (currentQuantity - 1);
-                        dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
-                    }
-                    else
-                    {
-                        DeleteOrderItem(orderId, productId);
-                        dgvCTHD.Rows.RemoveAt(e.RowIndex);
-                    }
+                    decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
+                        * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
+                    decimal newTotalPrice = unitPrice * (currentQuantity - 1);
+                    dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
                 }
-                // Column 6: Increase quantity
-                else if (e.ColumnIndex == 6)
+                else
                 {
-                    if(getQuantityByProductId(productId) == currentQuantity)
-                    {
-                        MessageBox.Show("Không đủ số lượng.");
-                    }
-                    else
-                    {
-                        UpdateQuantity(orderId, productId, currentQuantity + 1);
-                        dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity + 1;
-
-                        decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
-                                * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
-                        decimal newTotalPrice = unitPrice * (currentQuantity + 1);
-                        dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
-
-                        updateUnitPrice(orderId, unitPrice, productId);
-                    }
+                    DeleteOrderItem(orderId, productId);
+                    dgvCTHD.Rows.RemoveAt(e.RowIndex);
                 }
-                CalculateTotalPrice();
             }
+            // Column 6: Increase quantity
+            else if (e.ColumnIndex == 6)
+            {
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                string productName = dgvCTHD.Rows[e.RowIndex].Cells["TenSP"].Value.ToString();
+                int orderId = getOrderId(customerId);
+                int productId = getProductIdByName(productName);
+                int currentQuantity = (int)dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value;
+                if (getQuantityByProductId(productId) == currentQuantity)
+                {
+                    MessageBox.Show("Không đủ số lượng.");
+                }
+                else
+                {
+                    UpdateQuantity(orderId, productId, currentQuantity + 1);
+                    dgvCTHD.Rows[e.RowIndex].Cells["SoLuong"].Value = currentQuantity + 1;
+
+                    decimal unitPrice = decimal.Parse(dgvCTHD.Rows[e.RowIndex].Cells["DonGia"].Value.ToString())
+                            * (100 - (int)dgvCTHD.Rows[e.RowIndex].Cells["KM"].Value) / 100;
+                    decimal newTotalPrice = unitPrice * (currentQuantity + 1);
+                    dgvCTHD.Rows[e.RowIndex].Cells["TongTien"].Value = newTotalPrice.ToString("N0");
+
+                    updateUnitPrice(orderId, unitPrice, productId);
+                }
+            }
+            CalculateTotalPrice();
         }
 
         private void DeleteOrderItem(int orderId, int productId)
@@ -1319,6 +1327,16 @@ namespace DONGHO.Usercontrols
             {
                 btnHuy_Click(sender, e);
             }
+        }
+
+        private void dgvCTHD_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvCTHD_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
         }
     }
 }

@@ -530,6 +530,8 @@
             dgvCTHD.Size = new Size(596, 299);
             dgvCTHD.TabIndex = 1;
             dgvCTHD.CellClick += dgvCTHD_CellClick;
+            dgvCTHD.CellContentClick += dgvCTHD_CellContentClick;
+            dgvCTHD.ColumnHeaderMouseClick += dgvCTHD_ColumnHeaderMouseClick;
             // 
             // TenSP
             // 
@@ -944,6 +946,8 @@
         private Button btnNext;
         private Button btnPre;
         private Label lblPageNumber;
+        private Label label11;
+        private Label label13;
         private DataGridViewTextBoxColumn TenSP;
         private DataGridViewTextBoxColumn DonGia;
         private DataGridViewTextBoxColumn KM;
@@ -951,7 +955,5 @@
         private DataGridViewTextBoxColumn TongTien;
         private DataGridViewButtonColumn Xoa;
         private DataGridViewButtonColumn Them;
-        private Label label11;
-        private Label label13;
     }
 }

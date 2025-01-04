@@ -198,7 +198,15 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nSố lượng: {pdDTO.quantity}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        if (i == 0)
+                        {
+                            MessageBox.Show("Hong có data.");
+                        }
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo số lượng" && cboTopSanPham1.SelectedItem.ToString() == "Hôm qua")
@@ -219,7 +227,12 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nSố lượng: {pdDTO.quantity}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo số lượng" && cboTopSanPham1.SelectedItem.ToString() == "7 ngày qua")
@@ -236,11 +249,17 @@ namespace DONGHO.Usercontrols
                     int i = 0;
                     foreach (ProductDTO pdDTO in lstSP)
                     {
+
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points.Add(pdDTO.quantity);
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nSố lượng: {pdDTO.quantity}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo số lượng" && cboTopSanPham1.SelectedItem.ToString() == "Tháng này")
@@ -261,9 +280,16 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nSố lượng: {pdDTO.quantity}";
                         i++;
                     }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
+                    }
                 }
+
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo số lượng" && cboTopSanPham1.SelectedItem.ToString() == "Tháng trước")
                 {
                     chartTopSP.Series.Clear();
@@ -279,12 +305,20 @@ namespace DONGHO.Usercontrols
                     foreach (ProductDTO pdDTO in lstSP)
                     {
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points.Add(pdDTO.quantity);
-                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
+                        //chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
-                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+                        //chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = pdDTO.quantity + "";
+
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nSố lượng: {pdDTO.quantity}";
+
                         i++;
                     }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
+                    }
                 }
+
                 if (cboTopSanPham2.SelectedItem.ToString() == "Theo doanh thu" && cboTopSanPham1.SelectedItem.ToString() == "Hôm nay")
                 {
                     chartTopSP.Series.Clear();
@@ -303,7 +337,12 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nDoanh Thu: {pdDTO.tongdoanhthu.ToString("N0") + "đ"}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo doanh thu" && cboTopSanPham1.SelectedItem.ToString() == "Hôm qua")
@@ -324,7 +363,12 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nDoanh Thu: {pdDTO.tongdoanhthu.ToString("N0") + "đ"}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo doanh thu" && cboTopSanPham1.SelectedItem.ToString() == "7 ngày qua")
@@ -345,7 +389,12 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nDoanh Thu: {pdDTO.tongdoanhthu.ToString("N0") + "đ"}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo doanh thu" && cboTopSanPham1.SelectedItem.ToString() == "Tháng này")
@@ -366,7 +415,12 @@ namespace DONGHO.Usercontrols
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nDoanh Thu: {pdDTO.tongdoanhthu.ToString("N0") + "đ"}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
                 else if (cboTopSanPham2.SelectedItem.ToString() == "Theo doanh thu" && cboTopSanPham1.SelectedItem.ToString() == "Tháng trước")
@@ -384,10 +438,15 @@ namespace DONGHO.Usercontrols
                     foreach (ProductDTO pdDTO in lstSP)
                     {
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points.Add(pdDTO.tongdoanhthu);
-                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
+                        //chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].AxisLabel = pdDTO.productid.ToString();
                         chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].LegendText = pdDTO.productname;
-                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        //chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].Label = Convert(pdDTO.tongdoanhthu).ToString() + " ₫";
+                        chartTopSP.Series["Top 10 Sản Phẩm"].Points[i].ToolTip = $"Mã SP: {pdDTO.productid}\nTên SP: {pdDTO.productname}\nDoanh Thu: {pdDTO.tongdoanhthu.ToString("N0") + "đ"}";
                         i++;
+                    }
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Hong có data.");
                     }
                 }
             }

@@ -542,9 +542,9 @@
             label16.Location = new Point(29, 249);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
-            label16.Size = new Size(99, 25);
+            label16.Size = new Size(90, 25);
             label16.TabIndex = 55;
-            label16.Text = "Ngày sinh";
+            label16.Text = "Ngày tạo";
             label16.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // picHinhAnh

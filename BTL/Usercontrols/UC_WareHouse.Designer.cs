@@ -523,6 +523,7 @@
             dgvPhieuNhap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPhieuNhap.Size = new Size(803, 237);
             dgvPhieuNhap.TabIndex = 1;
+            dgvPhieuNhap.CellContentClick += dgvPhieuNhap_CellContentClick;
             // 
             // panel2
             // 
@@ -622,7 +623,7 @@
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
-            // UC_Sales
+            // UC_WareHouse
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -633,7 +634,7 @@
             Controls.Add(tableLayoutPanel4);
             Controls.Add(tableLayoutPanel3);
             Margin = new Padding(4, 5, 4, 5);
-            Name = "UC_Sales";
+            Name = "UC_WareHouse";
             Size = new Size(1313, 695);
             tableLayoutPanel3.ResumeLayout(false);
             pnlThongTinSanPham.ResumeLayout(false);

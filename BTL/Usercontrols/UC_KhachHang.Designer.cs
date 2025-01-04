@@ -321,13 +321,11 @@
             // txtPass
             // 
             txtPass.BackColor = Color.White;
-            txtPass.Enabled = false;
             txtPass.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtPass.ForeColor = Color.Black;
             txtPass.Location = new Point(187, 324);
             txtPass.Margin = new Padding(5);
             txtPass.Name = "txtPass";
-            txtPass.ReadOnly = true;
             txtPass.Size = new Size(262, 34);
             txtPass.TabIndex = 4;
             txtPass.TextChanged += txtPass_TextChanged;
@@ -623,8 +621,8 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dgvKhachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvKhachHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvKhachHang.Dock = DockStyle.Fill;
-            dgvKhachHang.Location = new Point(0, 0);
+            dgvKhachHang.Dock = DockStyle.Bottom;
+            dgvKhachHang.Location = new Point(0, 187);
             dgvKhachHang.Margin = new Padding(5);
             dgvKhachHang.MultiSelect = false;
             dgvKhachHang.Name = "dgvKhachHang";
@@ -647,7 +645,7 @@
             dgvKhachHang.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvKhachHang.RowTemplate.Height = 30;
             dgvKhachHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvKhachHang.Size = new Size(655, 718);
+            dgvKhachHang.Size = new Size(655, 531);
             dgvKhachHang.TabIndex = 0;
             dgvKhachHang.CellContentClick += dgvKhachHang_CellContentClick_1;
             // 
