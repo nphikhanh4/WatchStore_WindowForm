@@ -101,7 +101,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi khi xóa khách hàng: " + ex.Message);
+                throw new Exception("Không thể xóa, khách hàng có nhiều lịch sử mua hàng");
             }
         }
         #endregion

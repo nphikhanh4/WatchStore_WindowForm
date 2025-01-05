@@ -427,13 +427,12 @@
             btnHuy.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHuy.ForeColor = Color.White;
             btnHuy.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHuy.Location = new Point(334, 457);
+            btnHuy.Location = new Point(385, 457);
             btnHuy.Margin = new Padding(4, 5, 4, 5);
             btnHuy.Name = "btnHuy";
-            btnHuy.Size = new Size(168, 52);
+            btnHuy.Size = new Size(117, 52);
             btnHuy.TabIndex = 59;
-            btnHuy.Text = "Hủy (F12)";
-            btnHuy.TextAlign = ContentAlignment.MiddleRight;
+            btnHuy.Text = "Hủy";
             btnHuy.UseVisualStyleBackColor = false;
             btnHuy.Click += btnHuy_Click;
             // 
@@ -446,13 +445,12 @@
             btnThanhToan.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThanhToan.ForeColor = Color.White;
             btnThanhToan.ImageAlign = ContentAlignment.BottomLeft;
-            btnThanhToan.Location = new Point(86, 457);
+            btnThanhToan.Location = new Point(178, 457);
             btnThanhToan.Margin = new Padding(4, 5, 4, 5);
             btnThanhToan.Name = "btnThanhToan";
-            btnThanhToan.Size = new Size(240, 52);
+            btnThanhToan.Size = new Size(185, 52);
             btnThanhToan.TabIndex = 58;
-            btnThanhToan.Text = "Thanh toán (F9)";
-            btnThanhToan.TextAlign = ContentAlignment.MiddleRight;
+            btnThanhToan.Text = "Thanh toán";
             btnThanhToan.UseVisualStyleBackColor = false;
             btnThanhToan.Click += btnThanhToan_Click;
             // 

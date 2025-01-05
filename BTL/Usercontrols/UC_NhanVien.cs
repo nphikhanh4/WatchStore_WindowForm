@@ -34,14 +34,6 @@ namespace DONGHO.Usercontrols
                 if (dgvNhanVien.Columns.Count == 0)
                 {
                     dgvNhanVien.Columns.Add("AdminID", "Mã NV");
-                    dgvNhanVien.Columns.Add("Adminname", "Tên");
-                    dgvNhanVien.Columns.Add("FullName", "Họ và Tên");
-                    dgvNhanVien.Columns.Add("Email", "Email");
-                    dgvNhanVien.Columns.Add("Password", "Mật Khẩu");
-                    dgvNhanVien.Columns.Add("Phone", "SĐT");
-                    dgvNhanVien.Columns.Add("Role", "Quyền");
-                    dgvNhanVien.Columns.Add("CreatedAt", "Ngày Tạo TK");
-                    dgvNhanVien.Columns.Add("Gender", "Giới Tính");
                     dgvNhanVien.Columns.Add("ImgAdminPath", "Đường dẫn ảnh");
                     dgvNhanVien.Columns["ImgAdminPath"].Visible = false; // Ẩn cột này
                     DataGridViewImageColumn imgColumn = new DataGridViewImageColumn
@@ -51,8 +43,17 @@ namespace DONGHO.Usercontrols
                         ImageLayout = DataGridViewImageCellLayout.Zoom
                     };
                     dgvNhanVien.Columns.Add(imgColumn);
+                    dgvNhanVien.Columns.Add("Adminname", "Tên");
+                    dgvNhanVien.Columns.Add("FullName", "Họ và Tên");
+                    dgvNhanVien.Columns.Add("Email", "Email");
+                    dgvNhanVien.Columns.Add("Password", "Mật Khẩu");
+                    dgvNhanVien.Columns.Add("Phone", "SĐT");
+                    dgvNhanVien.Columns.Add("Role", "Quyền");
+                    dgvNhanVien.Columns.Add("CreatedAt", "Ngày Tạo TK");
+                    dgvNhanVien.Columns.Add("Gender", "Giới Tính");
                 }
                 dgvNhanVien.Rows.Clear();
+
                 DataTable dt = NhanvienBL.GetInstance.GetDanhSachNV();
                 foreach (DataRow row in dt.Rows)
                 {
@@ -145,7 +146,8 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi lọc nhân viên: " + ex.Message);
+                frm.lblThongBao.Text = "Khong tim thay nhan vien ";
+                frm.ShowDialog();
             }
         }
 
@@ -194,14 +196,15 @@ namespace DONGHO.Usercontrols
                     }
                     else
                     {
-                        MessageBox.Show("No Admin found matching the search criteria.");
+                        frm.lblThongBao.Text = "Khong tim thay nhan vien ";
+                        frm.ShowDialog();
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Handle any exceptions that occur
-                MessageBox.Show("Error while searching for customers: " + ex.Message);
+                MessageBox.Show("Error while searching for Admin: " + ex.Message);
             }
         }
 
@@ -268,8 +271,8 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that occur
-                MessageBox.Show("Error while searching for employees: " + ex.Message);
+                frm.lblThongBao.Text = "Khong tim thay nhan vien ";
+                frm.ShowDialog();
             }
         }
 
@@ -304,8 +307,8 @@ namespace DONGHO.Usercontrols
                     string.IsNullOrEmpty(adminRole) || string.IsNullOrEmpty(adminPhone) ||
                     string.IsNullOrEmpty(adminGender))
                 {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
-                    return;
+                    frm.lblThongBao.Text = "Nhập đầy đủ thông tin để thêm. ";
+                    frm.ShowDialog();
                 }
                 string imageFileName = string.Empty;
                 if (!string.IsNullOrEmpty(selectedImagePath)) // If a new image is selected
@@ -350,12 +353,13 @@ namespace DONGHO.Usercontrols
                 }
                 else
                 {
-                    MessageBox.Show("Error adding admin.");
+                    MessageBox.Show("");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding admin: " + ex.Message);
+                frm.lblThongBao.Text = "Nhập đầy đủ thông tin để thêm. ";
+                frm.ShowDialog();
             }
         }
 
@@ -400,12 +404,12 @@ namespace DONGHO.Usercontrols
             {
                 if (adminid == 0)
                 {
-                    MessageBox.Show("Please select a admin to delete.");
-                    return;
+                    frm.lblThongBao.Text = "Vui long chon nhan vien delete: ";
+                    frm.ShowDialog();
                 }
 
                 // Confirm deletion
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this admin?", "Confirm Deletion", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Ban chac chan muon delete?", "Confirm Deletion", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     bool result = NhanvienBL.GetInstance.DeleteAdmin(adminid);
@@ -428,7 +432,7 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                frm.lblThongBao.Text = "Error deleting admin: " + ex.Message;
+                frm.lblThongBao.Text = "Quyền hạn ko đủ để xóa.";
                 frm.ShowDialog();
             }
         }
@@ -493,7 +497,8 @@ namespace DONGHO.Usercontrols
                     }
                     else
                     {
-                        MessageBox.Show("Không thể lấy ảnh cũ.");
+                        frm.lblThongBao.Text="Không thể lấy ảnh cũ.";
+                        frm.ShowDialog();
                         return;
                     }
                 }
@@ -519,12 +524,14 @@ namespace DONGHO.Usercontrols
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi khi cập nhật thông tin nhân viên.");
+                    frm.lblThongBao.Text = "Lỗi khi cập nhật thông tin nhân viên: ";
+                    frm.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi cập nhật thông tin nhân viên: " + ex.Message);
+                frm.lblThongBao.Text = "Lỗi khi cập nhật thông tin nhân viên: ";
+                frm.ShowDialog();
             }
         }
 

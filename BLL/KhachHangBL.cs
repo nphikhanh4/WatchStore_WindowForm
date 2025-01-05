@@ -43,11 +43,11 @@ namespace BLL
             try
             {
                 int result = KhachHang.GetInstance.DeleteCustomer(CustomerID);
-                return result > 0;  // If more than 0 rows are affected, deletion is successful
+                return result > 0; 
             }
             catch (Exception ex)
             {
-                throw new Exception("Error in deleting customer: " + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
         #endregion

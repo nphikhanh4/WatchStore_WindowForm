@@ -37,13 +37,6 @@ namespace DONGHO.Usercontrols
                 if (dgvKhachHang.Columns.Count == 0)
                 {
                     dgvKhachHang.Columns.Add("CustomerID", "Mã KH");
-                    dgvKhachHang.Columns.Add("FullName", "Họ và Tên");
-                    dgvKhachHang.Columns.Add("Email", "Email");
-                    dgvKhachHang.Columns.Add("Password", "Mật Khẩu");
-                    dgvKhachHang.Columns.Add("Phone", "SĐT");
-                    dgvKhachHang.Columns.Add("Address", "Địa Chỉ");
-                    dgvKhachHang.Columns.Add("CreatedAt", "Ngày Tạo TK");
-                    dgvKhachHang.Columns.Add("Gender", "Giới Tính");
                     dgvKhachHang.Columns.Add("ImgCustomerPath", "Đường dẫn ảnh");
                     dgvKhachHang.Columns["ImgCustomerPath"].Visible = false; // Ẩn cột này
                     DataGridViewImageColumn imgColumn = new DataGridViewImageColumn
@@ -53,6 +46,14 @@ namespace DONGHO.Usercontrols
                         ImageLayout = DataGridViewImageCellLayout.Zoom
                     };
                     dgvKhachHang.Columns.Add(imgColumn);
+                    dgvKhachHang.Columns.Add("FullName", "Họ và Tên");
+                    dgvKhachHang.Columns.Add("Email", "Email");
+                    dgvKhachHang.Columns.Add("Password", "Mật Khẩu");
+                    dgvKhachHang.Columns.Add("Phone", "SĐT");
+                    dgvKhachHang.Columns.Add("Address", "Địa Chỉ");
+                    dgvKhachHang.Columns.Add("CreatedAt", "Ngày Tạo TK");
+                    dgvKhachHang.Columns.Add("Gender", "Giới Tính");
+                    
                 }
                 dgvKhachHang.Rows.Clear();
                 DataTable dt = KhachHangBL.GetInstance.GetDanhSachKH();
@@ -76,13 +77,9 @@ namespace DONGHO.Usercontrols
                     if (File.Exists(imagePath))
                     {
                         dgvKhachHang.Rows[rowIndex].Cells["ImageColumn"].Value = Image.FromFile(imagePath);
-
                     }
-
                 }
-
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi không xác định: " + ex.Message);
@@ -118,7 +115,6 @@ namespace DONGHO.Usercontrols
             }
         }
 
-
         private void btnXoa_Click_1(object sender, EventArgs e)
 
         {
@@ -131,14 +127,14 @@ namespace DONGHO.Usercontrols
                 }
 
                 // Confirm deletion
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this customer?", "Confirm Deletion", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn muốn xóa khách hàng này?", "Confirm Deletion", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     bool result = KhachHangBL.GetInstance.DeleteCustomer(customerid);
                     dgvKhachHang.Rows.Clear();
                     if (result)
                     {
-                        frm.lblThongBao.Text = "Customer deleted successfully.";
+                        frm.lblThongBao.Text = "Khách hàng xóa thành công.";
                         frm.ShowDialog();
 
                         LamMoi(); // Clear fields
@@ -146,13 +142,13 @@ namespace DONGHO.Usercontrols
                     }
                     else
                     {
-                        MessageBox.Show("Error deleting customer.");
+                        MessageBox.Show("");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting customer: " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -192,7 +188,7 @@ namespace DONGHO.Usercontrols
                         return;
                     }
 
-                    // Thử sao chép ảnh vào thư mục đích
+                   
                     try
                     {
                         File.Copy(selectedImagePath, targetPath, true); // Ghi đè nếu ảnh đã tồn tại
@@ -246,7 +242,10 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi cập nhật thông tin khách hàng: " + ex.Message);
+
+                frm.lblThongBao.Text = "Cần thay đổi thông tin mới để cập nhật";
+                frm.ShowDialog();
+               
             }
         }
 
@@ -319,7 +318,9 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding customer: " + ex.Message);
+
+                frm.lblThongBao.Text = "Cần điền đầy đủ thông tin để thêm";
+                frm.ShowDialog();
             }
         }
 
@@ -453,8 +454,9 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that occur
-                MessageBox.Show("Error while searching for customers: " + ex.Message);
+
+                frm.lblThongBao.Text = "Không tìm thấy khách hàng";
+                frm.ShowDialog();
             }
 
         }

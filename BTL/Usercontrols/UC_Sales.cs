@@ -123,7 +123,9 @@ namespace DONGHO.Usercontrols
             }
             catch (Exception)
             {
-                return null;
+                SystemImage img = SystemImage.FromFile("D:\\BTL_Web\\Khanh\\Web\\WebApplication1\\Content\\img\\G-Shock\\G-Shock Dimesion\\G-Shock Dimesion.jpg");
+                Bitmap resizedImage = new Bitmap(img, new Size(width, height));
+                return resizedImage;
             }
         }
 
@@ -806,7 +808,8 @@ namespace DONGHO.Usercontrols
 
                         string updateQuery = @"
                             UPDATE [Order] 
-                            SET OrderStatus = @orderStatus 
+                            SET OrderStatus = @orderStatus,
+                            OrderDate = GETDATE()
                             WHERE OrderID = @OrderID";
 
                         using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
@@ -1075,7 +1078,7 @@ namespace DONGHO.Usercontrols
                     Width = 220,
                     Height = 225,
                     BorderStyle = BorderStyle.FixedSingle,
-                    BackColor = Color.Pink,
+                    BackColor = Color.LightGray,
                     Margin = new Padding(5),
                 };
 
@@ -1095,8 +1098,15 @@ namespace DONGHO.Usercontrols
                     Padding = new Padding(35, 3, 0, 0),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
+                if(productName == "Casio Edifice")
+                {
+                    pictureBox.Image = ResizeImage(@"D:\BTL_Web\Khanh\Web\WebApplication1\Content\img\Casio\Casio Sheen\Casio Sheen.jpg", 185, 145);
+                }
+                else
+                {
+                    pictureBox.Image = ResizeImage(imagePath, 185, 145);
 
-                pictureBox.Image = ResizeImage(imagePath, 185, 145);
+                }
 
                 Label lblName = new Label
                 {
