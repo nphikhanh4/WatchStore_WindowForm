@@ -386,52 +386,51 @@ namespace DAL
             try
             {
                 string sql = @"
-            INSERT INTO SupplierProduct (
-                SupplierID,
-                ProductName,
-                Price,
-                Status,
-                Quantity,
-            
-                Img,
-                CategoryID,
-                BrandID
-            ) VALUES (
-                @SupplierID,
-                @ProductName,
-                @Price,
-                @Status,
-                @Quantity,
-             
-                @Img,
-                @CategoryID,
-                @BrandID
-            )";
-                DateTime currentDate = DateTime.Now;
+        INSERT INTO SupplierProduct (
+            SupplierID,
+            ProductName,
+            Price,
+            Status,
+            Quantity,
+            Img,
+            CategoryID,
+            BrandID
+        ) VALUES (
+            @SupplierID,
+            @ProductName,
+            @Price,
+            @Status,
+            @Quantity,
+            @Img,
+            @CategoryID,
+            @BrandID
+        )";
+
                 SqlParameter[] parameters = new SqlParameter[]
                 {
-                    new SqlParameter("@SupplierID", SqlDbType.Int) { Value = supplierID },
-                    new SqlParameter("@ProductName", SqlDbType.NVarChar) { Value = productName },
-                    new SqlParameter("@Price", SqlDbType.Decimal) { Value = price },
-                    new SqlParameter("@Status", SqlDbType.Int) { Value = status },
-                    new SqlParameter("@Quantity", SqlDbType.Int) { Value = quantity },
-                    new SqlParameter("@CreatedAt", SqlDbType.DateTime) { Value = currentDate },
-                    new SqlParameter("@Img", SqlDbType.NVarChar) { Value = img ?? (object)DBNull.Value },
-                    new SqlParameter("@CategoryID", SqlDbType.Int) { Value = categoryID },
-                    new SqlParameter("@BrandID", SqlDbType.Int) { Value = brandID }
+            new SqlParameter("@SupplierID", SqlDbType.Int) { Value = supplierID },
+            new SqlParameter("@ProductName", SqlDbType.NVarChar) { Value = productName },
+            new SqlParameter("@Price", SqlDbType.Decimal) { Value = price },
+            new SqlParameter("@Status", SqlDbType.Int) { Value = status },
+            new SqlParameter("@Quantity", SqlDbType.Int) { Value = quantity },
+            new SqlParameter("@Img", SqlDbType.NVarChar) { Value = img ?? (object)DBNull.Value },
+            new SqlParameter("@CategoryID", SqlDbType.Int) { Value = categoryID },
+            new SqlParameter("@BrandID", SqlDbType.Int) { Value = brandID }
                 };
 
-                return DataProvider.JustExcuteWithParameter(sql, parameters);
+                Console.WriteLine("Executing SQL with parameters:");
+                foreach (var param in parameters)
+                {
+                    Console.WriteLine($"{param.ParameterName}: {param.Value}");
+                }
+
+                return DataProvider.JustExcuteWithParameter(sql, parameters); // Ensure this returns rows affected or a success code
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm sản phẩm: " + ex.Message);
-                return -1;
+                Console.WriteLine("Error in AddSupplierProduct: " + ex.Message);
+                throw; // Optionally rethrow to handle higher up
             }
         }
-
-
-
-
     }
 }

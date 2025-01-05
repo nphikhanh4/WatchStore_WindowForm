@@ -39,13 +39,10 @@
             cboLoai = new ComboBox();
             txtSoLuong = new TextBox();
             label18 = new Label();
-            btnThemNCC = new Button();
-            btnThemLoaiSP = new Button();
             btnLamMoiThongTin = new Button();
             btnNgungKinhDoanh = new Button();
             btnCapNhatSP = new Button();
             dateNgaySX = new DateTimePicker();
-            btnThemSP = new Button();
             cboNCC = new ComboBox();
             cboNhanHang = new ComboBox();
             label16 = new Label();
@@ -166,13 +163,10 @@
             pnlThongTinSanPham.Controls.Add(cboLoai);
             pnlThongTinSanPham.Controls.Add(txtSoLuong);
             pnlThongTinSanPham.Controls.Add(label18);
-            pnlThongTinSanPham.Controls.Add(btnThemNCC);
-            pnlThongTinSanPham.Controls.Add(btnThemLoaiSP);
             pnlThongTinSanPham.Controls.Add(btnLamMoiThongTin);
             pnlThongTinSanPham.Controls.Add(btnNgungKinhDoanh);
             pnlThongTinSanPham.Controls.Add(btnCapNhatSP);
             pnlThongTinSanPham.Controls.Add(dateNgaySX);
-            pnlThongTinSanPham.Controls.Add(btnThemSP);
             pnlThongTinSanPham.Controls.Add(cboNCC);
             pnlThongTinSanPham.Controls.Add(cboNhanHang);
             pnlThongTinSanPham.Controls.Add(label16);
@@ -199,6 +193,7 @@
             pnlThongTinSanPham.Name = "pnlThongTinSanPham";
             pnlThongTinSanPham.Size = new Size(732, 451);
             pnlThongTinSanPham.TabIndex = 55;
+            pnlThongTinSanPham.Paint += PnlThongTinSanPham_Paint;
             // 
             // cboLoai
             // 
@@ -210,8 +205,10 @@
             cboLoai.Location = new Point(152, 247);
             cboLoai.Margin = new Padding(4, 5, 4, 5);
             cboLoai.Name = "cboLoai";
-            cboLoai.Size = new Size(213, 37);
+            cboLoai.Size = new Size(254, 37);
             cboLoai.TabIndex = 58;
+            cboLoai.SelectedIndexChanged += CboLoai_SelectedIndexChanged;
+            cboLoai.Click += txtCombobox1_Click;
             // 
             // txtSoLuong
             // 
@@ -224,6 +221,7 @@
             txtSoLuong.ReadOnly = true;
             txtSoLuong.Size = new Size(255, 34);
             txtSoLuong.TabIndex = 56;
+            txtSoLuong.Click += txtSoLuong_Click;
             // 
             // label18
             // 
@@ -237,40 +235,6 @@
             label18.TabIndex = 57;
             label18.Text = "Số lượng";
             label18.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // btnThemNCC
-            // 
-            btnThemNCC.BackColor = Color.White;
-            btnThemNCC.BackgroundImageLayout = ImageLayout.None;
-            btnThemNCC.FlatAppearance.BorderSize = 0;
-            btnThemNCC.FlatStyle = FlatStyle.Flat;
-            btnThemNCC.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnThemNCC.ForeColor = Color.White;
-            btnThemNCC.Image = Properties.Resources.icons8_add_32px1;
-            btnThemNCC.Location = new Point(373, 289);
-            btnThemNCC.Margin = new Padding(4, 5, 4, 5);
-            btnThemNCC.Name = "btnThemNCC";
-            btnThemNCC.Size = new Size(33, 37);
-            btnThemNCC.TabIndex = 55;
-            btnThemNCC.TextAlign = ContentAlignment.MiddleRight;
-            btnThemNCC.UseVisualStyleBackColor = false;
-            // 
-            // btnThemLoaiSP
-            // 
-            btnThemLoaiSP.BackColor = Color.White;
-            btnThemLoaiSP.BackgroundImageLayout = ImageLayout.None;
-            btnThemLoaiSP.FlatAppearance.BorderSize = 0;
-            btnThemLoaiSP.FlatStyle = FlatStyle.Flat;
-            btnThemLoaiSP.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnThemLoaiSP.ForeColor = Color.White;
-            btnThemLoaiSP.Image = Properties.Resources.icons8_add_32px;
-            btnThemLoaiSP.Location = new Point(370, 241);
-            btnThemLoaiSP.Margin = new Padding(4, 5, 4, 5);
-            btnThemLoaiSP.Name = "btnThemLoaiSP";
-            btnThemLoaiSP.Size = new Size(36, 37);
-            btnThemLoaiSP.TabIndex = 55;
-            btnThemLoaiSP.TextAlign = ContentAlignment.MiddleRight;
-            btnThemLoaiSP.UseVisualStyleBackColor = false;
             // 
             // btnLamMoiThongTin
             // 
@@ -328,6 +292,7 @@
             btnCapNhatSP.Text = "Cập nhật";
             btnCapNhatSP.TextAlign = ContentAlignment.MiddleRight;
             btnCapNhatSP.UseVisualStyleBackColor = false;
+            btnCapNhatSP.Click += btnCapNhatSP_Click;
             // 
             // dateNgaySX
             // 
@@ -343,25 +308,6 @@
             dateNgaySX.Size = new Size(154, 34);
             dateNgaySX.TabIndex = 12;
             // 
-            // btnThemSP
-            // 
-            btnThemSP.BackColor = Color.FromArgb(17, 145, 249);
-            btnThemSP.BackgroundImageLayout = ImageLayout.None;
-            btnThemSP.FlatAppearance.BorderSize = 0;
-            btnThemSP.FlatStyle = FlatStyle.Flat;
-            btnThemSP.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnThemSP.ForeColor = Color.White;
-            btnThemSP.Image = Properties.Resources.icons8_add_32px_1;
-            btnThemSP.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThemSP.Location = new Point(593, 390);
-            btnThemSP.Margin = new Padding(4, 5, 4, 5);
-            btnThemSP.Name = "btnThemSP";
-            btnThemSP.Size = new Size(123, 41);
-            btnThemSP.TabIndex = 7;
-            btnThemSP.Text = "Thêm";
-            btnThemSP.TextAlign = ContentAlignment.MiddleRight;
-            btnThemSP.UseVisualStyleBackColor = false;
-            // 
             // cboNCC
             // 
             cboNCC.BackColor = Color.White;
@@ -372,8 +318,9 @@
             cboNCC.Location = new Point(152, 289);
             cboNCC.Margin = new Padding(4, 5, 4, 5);
             cboNCC.Name = "cboNCC";
-            cboNCC.Size = new Size(213, 37);
+            cboNCC.Size = new Size(254, 37);
             cboNCC.TabIndex = 9;
+            cboNCC.Click += txtCombobox2_Click;
             // 
             // cboNhanHang
             // 
@@ -385,7 +332,7 @@
             cboNhanHang.Location = new Point(152, 334);
             cboNhanHang.Margin = new Padding(4, 5, 4, 5);
             cboNhanHang.Name = "cboNhanHang";
-            cboNhanHang.Size = new Size(216, 37);
+            cboNhanHang.Size = new Size(254, 37);
             cboNhanHang.TabIndex = 10;
             // 
             // label16
@@ -412,7 +359,7 @@
             picHinhAnh.SizeMode = PictureBoxSizeMode.Zoom;
             picHinhAnh.TabIndex = 6;
             picHinhAnh.TabStop = false;
-            picHinhAnh.Click += PicHinhAnh_Click;
+            picHinhAnh.Click += picHinhAnh_Click;
             // 
             // label24
             // 
@@ -437,6 +384,7 @@
             txtLoiNhuan.Name = "txtLoiNhuan";
             txtLoiNhuan.Size = new Size(253, 34);
             txtLoiNhuan.TabIndex = 3;
+            txtLoiNhuan.TextChanged += txtLoiNhuan_TextChanged;
             // 
             // txtGiaNhap
             // 
@@ -448,6 +396,7 @@
             txtGiaNhap.Name = "txtGiaNhap";
             txtGiaNhap.Size = new Size(252, 34);
             txtGiaNhap.TabIndex = 2;
+            txtGiaNhap.TextChanged += txtGiaNhap_TextChanged;
             // 
             // txtKhuyenMai
             // 
@@ -459,6 +408,7 @@
             txtKhuyenMai.Name = "txtKhuyenMai";
             txtKhuyenMai.Size = new Size(252, 34);
             txtKhuyenMai.TabIndex = 1;
+            txtKhuyenMai.Click += txtKhuyenMai_Click;
             // 
             // txtGiaBan
             // 
@@ -468,7 +418,6 @@
             txtGiaBan.Location = new Point(154, 159);
             txtGiaBan.Margin = new Padding(4, 5, 4, 5);
             txtGiaBan.Name = "txtGiaBan";
-            txtGiaBan.ReadOnly = true;
             txtGiaBan.Size = new Size(253, 34);
             txtGiaBan.TabIndex = 14;
             // 
@@ -547,6 +496,7 @@
             txtTen.Name = "txtTen";
             txtTen.Size = new Size(252, 34);
             txtTen.TabIndex = 0;
+            txtTen.Click += txtTen_Click;
             // 
             // label13
             // 
@@ -778,13 +728,12 @@
             // 
             // label25
             // 
-            label25.AutoSize = true;
             label25.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label25.ForeColor = Color.Black;
-            label25.Location = new Point(483, 14);
+            label25.Location = new Point(558, 14);
             label25.Margin = new Padding(4, 0, 4, 0);
             label25.Name = "label25";
-            label25.Size = new Size(133, 25);
+            label25.Size = new Size(204, 25);
             label25.TabIndex = 57;
             label25.Text = "Nhà cung cấp";
             label25.TextAlign = ContentAlignment.MiddleCenter;
@@ -795,21 +744,20 @@
             cboLocNCC.Font = new Font("Microsoft Sans Serif", 14.25F);
             cboLocNCC.ForeColor = Color.Black;
             cboLocNCC.FormattingEnabled = true;
-            cboLocNCC.Location = new Point(488, 49);
+            cboLocNCC.Location = new Point(558, 49);
             cboLocNCC.Margin = new Padding(4, 5, 4, 5);
             cboLocNCC.Name = "cboLocNCC";
-            cboLocNCC.Size = new Size(144, 37);
+            cboLocNCC.Size = new Size(215, 37);
             cboLocNCC.TabIndex = 56;
             // 
             // label8
             // 
-            label8.AutoSize = true;
             label8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(329, 14);
+            label8.Location = new Point(335, 14);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(140, 25);
+            label8.Size = new Size(211, 25);
             label8.TabIndex = 55;
             label8.Text = "Loại sản phẩm";
             label8.TextAlign = ContentAlignment.MiddleCenter;
@@ -823,7 +771,7 @@
             cboLocLoaiSP.Location = new Point(335, 49);
             cboLocLoaiSP.Margin = new Padding(4, 5, 4, 5);
             cboLocLoaiSP.Name = "cboLocLoaiSP";
-            cboLocLoaiSP.Size = new Size(144, 37);
+            cboLocLoaiSP.Size = new Size(215, 37);
             cboLocLoaiSP.TabIndex = 1;
             // 
             // btnLamMoi
@@ -843,6 +791,7 @@
             btnLamMoi.Text = "Làm mới";
             btnLamMoi.TextAlign = ContentAlignment.MiddleRight;
             btnLamMoi.UseVisualStyleBackColor = false;
+            btnLamMoi.Click += btnLamMoi_Click;
             // 
             // btnApDung
             // 
@@ -861,6 +810,7 @@
             btnApDung.Text = "Áp dụng";
             btnApDung.TextAlign = ContentAlignment.MiddleRight;
             btnApDung.UseVisualStyleBackColor = false;
+            btnApDung.Click += btnApDung_Click;
             // 
             // label7
             // 
@@ -947,6 +897,7 @@
             pnlNCC.Name = "pnlNCC";
             pnlNCC.Size = new Size(221, 127);
             pnlNCC.TabIndex = 55;
+            pnlNCC.Click += pnlNCC_Click;
             // 
             // pictureBox3
             // 
@@ -958,6 +909,7 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 2;
             pictureBox3.TabStop = false;
+            pictureBox3.Click += pnlNCC_Click;
             // 
             // label26
             // 
@@ -982,6 +934,7 @@
             pnlLoaiSP.Name = "pnlLoaiSP";
             pnlLoaiSP.Size = new Size(215, 127);
             pnlLoaiSP.TabIndex = 55;
+            pnlLoaiSP.Click += pnlLoaiSP_Click;
             // 
             // pictureBox1
             // 
@@ -993,6 +946,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pnlLoaiSP_Click;
             // 
             // label5
             // 
@@ -1042,6 +996,7 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "uc_SanPham";
             Size = new Size(1795, 797);
+            Load += Uc_SanPham_Load;
             tableLayoutPanel3.ResumeLayout(false);
             panel8.ResumeLayout(false);
             pnlThongTinSanPham.ResumeLayout(false);
@@ -1106,13 +1061,10 @@
         private Panel pnlThongTinSanPham;
         private TextBox txtSoLuong;
         private Label label18;
-        private Button btnThemNCC;
-        private Button btnThemLoaiSP;
         private Button btnLamMoiThongTin;
         private Button btnNgungKinhDoanh;
         private Button btnCapNhatSP;
         private DateTimePicker dateNgaySX;
-        private Button btnThemSP;
         private ComboBox cboNCC;
         private ComboBox cboNhanHang;
         private Label label16;

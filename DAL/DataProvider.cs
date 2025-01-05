@@ -13,7 +13,7 @@ namespace DAL
     {
         public static SqlConnection Openconnect()
         {
-            string sChuoiKetNoi = @"Server=LAPTOP-4TC8L8F1;Database=WatchStore;Trusted_Connection=True;TrustServerCertificate=true;";
+            string sChuoiKetNoi = @"Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
             SqlConnection con = new SqlConnection(sChuoiKetNoi);
             con.Open();
             return con;
@@ -25,7 +25,7 @@ namespace DAL
 
         public static string getConnectionString()
         {
-           return @"Server=LAPTOP-4TC8L8F1;Database=WatchStore;Trusted_Connection=True;TrustServerCertificate=true;";
+           return @"Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
         }
 
         public static int JustExcuteNoParameter(string sql)

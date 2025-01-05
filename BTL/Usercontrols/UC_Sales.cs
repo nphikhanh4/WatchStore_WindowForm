@@ -23,7 +23,7 @@ namespace DONGHO.Usercontrols
 {
     public partial class UC_Sales : UserControl
     {
-        private string connectionString = "Server=LAPTOP-4TC8L8F1;Database=WatchStore;Trusted_Connection=True;TrustServerCertificate=true;";
+        private string connectionString = "Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
         private int currentPage = 1;
         private int itemsPerPage = 6;
         private FlowLayoutPanel flowLayout;
@@ -79,23 +79,23 @@ namespace DONGHO.Usercontrols
                 return;
             }
 
-            if (!dt.Columns.Contains("SupplierId") || !dt.Columns.Contains("SupplierName"))
+            if (!dt.Columns.Contains("SupplierID") || !dt.Columns.Contains("ContactName"))
             {
                 MessageBox.Show("Dữ liệu nhà cung cấp không đúng định dạng.");
                 return;
             }
 
             DataRow dr = dt.NewRow();
-            dr["SupplierId"] = "-1";
-            dr["SupplierName"] = "Tất cả";
+            dr["SupplierID"] = "-1";
+            dr["ContactName"] = "Tất cả";
             dt.Rows.Add(dr);
 
             dt.DefaultView.Sort = "SupplierId ASC";
             dt = dt.DefaultView.ToTable();
 
             cboLocNCC.DataSource = dt;
-            cboLocNCC.DisplayMember = "SupplierName";
-            cboLocNCC.ValueMember = "SupplierId";
+            cboLocNCC.DisplayMember = "ContactName";
+            cboLocNCC.ValueMember = "SupplierID";
 
             if (cboLocNCC.Items.Count > 0)
                 cboLocNCC.SelectedIndex = cboLocNCC.Items.Count - 1;

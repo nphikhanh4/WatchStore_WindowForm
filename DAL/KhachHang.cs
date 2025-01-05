@@ -70,8 +70,8 @@ namespace DAL
                              string customerPassword, string customerAddress,
                              string customerGender, string imageFileName)
         {
-            string query = "INSERT INTO Customer (FullName, Email, Phone, Password, Address, Gender, ImgCustomer) " +
-                          "VALUES (@FullName, @Email, @Phone, @Password, @Address, @Gender, @ImgCustomer)";
+            string query = "INSERT INTO Customer (FullName, Email, Phone, Password, Address, Gender, ImgCustomer, check_Remove) " +
+                          "VALUES (@FullName, @Email, @Phone, @Password, @Address, @Gender, @ImgCustomer, 1)";
             SqlParameter[] parameters =
             {
 

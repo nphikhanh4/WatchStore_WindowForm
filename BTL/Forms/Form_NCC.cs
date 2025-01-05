@@ -17,6 +17,8 @@ namespace DONGHO.Forms
 {
     public partial class Form_NCC : Form
     {
+        public bool b = false;
+        int mancc = 0;
         public Form_NCC()
         {
             InitializeComponent();

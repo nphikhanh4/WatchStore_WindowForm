@@ -259,3 +259,5 @@ D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\ref\DONGHO.dll
 D:\BTL_W\BTL_W\BTL\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
 D:\BTL_W\BTL_W\BTL\bin\Debug\net8.0-windows\itextsharp.dll
 D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\DONGHO.Usercontrols.uc_Report.resources
+D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\DONGHO.Forms.Form_Img.resources
+D:\BTL_W\BTL_W\BTL\obj\Debug\net8.0-windows\DONGHO.Forms.Form_LoaiSP.resources

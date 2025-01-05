@@ -13,6 +13,12 @@
     <Compile Update="Forms\Form_DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Form_Img.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Form_LoaiSP.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Form_NCC.cs">
       <SubType>Form</SubType>
     </Compile>

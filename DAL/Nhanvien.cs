@@ -85,8 +85,8 @@ namespace DAL
                              string adminEmail, string adminRole, string adminPhone,
                              string adminGender, string imageFileName)
         {
-            string query = "INSERT INTO Admin (Adminname, Password, FullName, Email, Role, Phone, Gender, ImgAdmin) " +
-                           "VALUES (@Adminname, @Password, @FullName, @Email, @Role, @Phone, @Gender, @ImgAdmin)";
+            string query = "INSERT INTO Admin (Adminname, Password, FullName, Email, Role, Phone, Gender, ImgAdmin, check_Remove) " +
+                           "VALUES (@Adminname, @Password, @FullName, @Email, @Role, @Phone, @Gender, @ImgAdmin, 1)";
             SqlParameter[] parameters =
             {
                 new SqlParameter("@Adminname", adminName),

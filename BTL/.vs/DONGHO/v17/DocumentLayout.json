@@ -3,15 +3,26 @@
   "WorkspaceRootPath": "D:\\BTL_W\\BTL_W\\BTL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0DA97AC7-F1B7-403A-A23E-E1B87D38414C}|..\\DAL\\DAL.csproj|d:\\btl_w\\btl_w\\dal\\supplierproductdl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_warehouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_sales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_sales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0DA97AC7-F1B7-403A-A23E-E1B87D38414C}|..\\DAL\\DAL.csproj|d:\\btl_w\\btl_w\\dal\\categorydl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|d:\\btl_w\\btl_w\\btl\\usercontrols\\uc_sales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEDD642-377D-4929-B08B-44ABC83FA3C5}|DONGHO.csproj|solutionrelative:usercontrols\\uc_sales.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0DA97AC7-F1B7-403A-A23E-E1B87D38414C}|..\\DAL\\DAL.csproj|d:\\btl_w\\btl_w\\dal\\supplierdl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,46 +32,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SupplierProductDL.cs",
-              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\DAL\\SupplierProductDL.cs",
-              "RelativeDocumentMoniker": "..\\DAL\\SupplierProductDL.cs",
-              "ToolTip": "D:\\BTL_W\\BTL_W\\DAL\\SupplierProductDL.cs",
-              "RelativeToolTip": "..\\DAL\\SupplierProductDL.cs",
-              "ViewState": "AgIAAJcBAAAAAAAAAAAqwKsBAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T11:49:39.752Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UC_WareHouse.cs [Design]",
-              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_WareHouse.cs",
-              "RelativeDocumentMoniker": "Usercontrols\\UC_WareHouse.cs",
-              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_WareHouse.cs [Design]",
-              "RelativeToolTip": "Usercontrols\\UC_WareHouse.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T11:44:45.478Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_WareHouse.cs",
-              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_WareHouse.cs",
-              "RelativeDocumentMoniker": "Usercontrols\\UC_WareHouse.cs",
-              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_WareHouse.cs",
-              "RelativeToolTip": "Usercontrols\\UC_WareHouse.cs",
-              "ViewState": "AgIAABcCAAAAAAAAAAAqwCoCAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T11:38:21.93Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -92,6 +65,82 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "uc_SanPham.cs",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\uc_SanPham.cs",
+              "RelativeDocumentMoniker": "Usercontrols\\uc_SanPham.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\uc_SanPham.cs",
+              "RelativeToolTip": "Usercontrols\\uc_SanPham.cs",
+              "ViewState": "AgIAAL4CAAAAAAAAAAAYwBoCAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:32:07.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "uc_SanPham.cs [Design]",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\uc_SanPham.cs",
+              "RelativeDocumentMoniker": "Usercontrols\\uc_SanPham.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\uc_SanPham.cs [Design]",
+              "RelativeToolTip": "Usercontrols\\uc_SanPham.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:31:49.779Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SupplierDL.cs",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\DAL\\SupplierDL.cs",
+              "RelativeDocumentMoniker": "..\\DAL\\SupplierDL.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\DAL\\SupplierDL.cs",
+              "RelativeToolTip": "..\\DAL\\SupplierDL.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwD8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:17:36.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CategoryDL.cs",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\DAL\\CategoryDL.cs",
+              "RelativeDocumentMoniker": "..\\DAL\\CategoryDL.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\DAL\\CategoryDL.cs",
+              "RelativeToolTip": "..\\DAL\\CategoryDL.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAuwB8AAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:13:51.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UC_Sales.cs",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
+              "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
+              "RelativeToolTip": "Usercontrols\\UC_Sales.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAqwGkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:08:58.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UC_Sales.cs [Design]",
+              "DocumentMoniker": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs",
+              "RelativeDocumentMoniker": "Usercontrols\\UC_Sales.cs",
+              "ToolTip": "D:\\BTL_W\\BTL_W\\BTL\\Usercontrols\\UC_Sales.cs [Design]",
+              "RelativeToolTip": "Usercontrols\\UC_Sales.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-05T13:08:48.989Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
