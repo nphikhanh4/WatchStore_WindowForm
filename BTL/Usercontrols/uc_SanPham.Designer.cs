@@ -706,13 +706,14 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.icons8_search_24px;
-            pictureBox2.Location = new Point(260, 5);
+            pictureBox2.Location = new Point(273, 2);
             pictureBox2.Margin = new Padding(4, 5, 4, 5);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(36, 34);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 61;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // txtTenSP
             // 

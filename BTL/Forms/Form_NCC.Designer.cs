@@ -61,9 +61,9 @@
             label4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
             label4.Location = new Point(0, 0);
-            label4.Margin = new Padding(6, 0, 6, 0);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(2173, 76);
+            label4.Size = new Size(1195, 48);
             label4.TabIndex = 71;
             label4.Text = "Nhà Cung Cấp";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -76,10 +76,10 @@
             btnXoa.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnXoa.ForeColor = Color.White;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(195, 470);
-            btnXoa.Margin = new Padding(6, 7, 6, 7);
+            btnXoa.Location = new Point(120, 294);
+            btnXoa.Margin = new Padding(4, 4, 4, 4);
             btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(290, 91);
+            btnXoa.Size = new Size(178, 57);
             btnXoa.TabIndex = 4;
             btnXoa.Text = "Ngừng hợp tác";
             btnXoa.UseVisualStyleBackColor = false;
@@ -93,10 +93,10 @@
             btnCapNhat.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCapNhat.ForeColor = Color.White;
             btnCapNhat.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCapNhat.Location = new Point(498, 470);
-            btnCapNhat.Margin = new Padding(6, 7, 6, 7);
+            btnCapNhat.Location = new Point(306, 294);
+            btnCapNhat.Margin = new Padding(4, 4, 4, 4);
             btnCapNhat.Name = "btnCapNhat";
-            btnCapNhat.Size = new Size(202, 91);
+            btnCapNhat.Size = new Size(124, 57);
             btnCapNhat.TabIndex = 5;
             btnCapNhat.Text = "Cập nhật";
             btnCapNhat.UseVisualStyleBackColor = false;
@@ -111,10 +111,10 @@
             btnThem.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnThem.ForeColor = Color.White;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(713, 470);
-            btnThem.Margin = new Padding(6, 7, 6, 7);
+            btnThem.Location = new Point(439, 294);
+            btnThem.Margin = new Padding(4, 4, 4, 4);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(202, 91);
+            btnThem.Size = new Size(124, 57);
             btnThem.TabIndex = 6;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = false;
@@ -125,10 +125,10 @@
             txtTen.BackColor = Color.White;
             txtTen.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtTen.ForeColor = Color.Black;
-            txtTen.Location = new Point(195, 47);
-            txtTen.Margin = new Padding(6, 7, 6, 7);
+            txtTen.Location = new Point(120, 29);
+            txtTen.Margin = new Padding(4, 4, 4, 4);
             txtTen.Name = "txtTen";
-            txtTen.Size = new Size(901, 51);
+            txtTen.Size = new Size(411, 34);
             txtTen.TabIndex = 0;
             // 
             // txtEmail
@@ -136,10 +136,10 @@
             txtEmail.BackColor = Color.White;
             txtEmail.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.ForeColor = Color.Black;
-            txtEmail.Location = new Point(195, 305);
-            txtEmail.Margin = new Padding(6, 7, 6, 7);
+            txtEmail.Location = new Point(120, 191);
+            txtEmail.Margin = new Padding(4, 4, 4, 4);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(901, 51);
+            txtEmail.Size = new Size(411, 34);
             txtEmail.TabIndex = 3;
             // 
             // txtSDT
@@ -147,10 +147,10 @@
             txtSDT.BackColor = Color.White;
             txtSDT.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSDT.ForeColor = Color.Black;
-            txtSDT.Location = new Point(195, 219);
-            txtSDT.Margin = new Padding(6, 7, 6, 7);
+            txtSDT.Location = new Point(120, 137);
+            txtSDT.Margin = new Padding(4, 4, 4, 4);
             txtSDT.Name = "txtSDT";
-            txtSDT.Size = new Size(901, 51);
+            txtSDT.Size = new Size(411, 34);
             txtSDT.TabIndex = 2;
             // 
             // label2
@@ -158,10 +158,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(22, 62);
-            label2.Margin = new Padding(6, 0, 6, 0);
+            label2.Location = new Point(14, 39);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(151, 37);
+            label2.Size = new Size(96, 25);
             label2.TabIndex = 58;
             label2.Text = "Tên NCC";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -171,10 +171,10 @@
             txtDiaChi.BackColor = Color.White;
             txtDiaChi.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDiaChi.ForeColor = Color.Black;
-            txtDiaChi.Location = new Point(195, 133);
-            txtDiaChi.Margin = new Padding(6, 7, 6, 7);
+            txtDiaChi.Location = new Point(120, 83);
+            txtDiaChi.Margin = new Padding(4, 4, 4, 4);
             txtDiaChi.Name = "txtDiaChi";
-            txtDiaChi.Size = new Size(901, 51);
+            txtDiaChi.Size = new Size(411, 34);
             txtDiaChi.TabIndex = 1;
             // 
             // label3
@@ -182,10 +182,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(76, 320);
-            label3.Margin = new Padding(6, 0, 6, 0);
+            label3.Location = new Point(47, 200);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(97, 37);
+            label3.Size = new Size(60, 25);
             label3.TabIndex = 58;
             label3.Text = "Email";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -195,10 +195,10 @@
             label12.AutoSize = true;
             label12.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.Black;
-            label12.Location = new Point(91, 234);
-            label12.Margin = new Padding(6, 0, 6, 0);
+            label12.Location = new Point(56, 146);
+            label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
-            label12.Size = new Size(81, 37);
+            label12.Size = new Size(53, 25);
             label12.TabIndex = 58;
             label12.Text = "SĐT";
             label12.TextAlign = ContentAlignment.MiddleCenter;
@@ -208,10 +208,10 @@
             label10.AutoSize = true;
             label10.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.Black;
-            label10.Location = new Point(50, 148);
-            label10.Margin = new Padding(6, 0, 6, 0);
+            label10.Location = new Point(31, 92);
+            label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(122, 37);
+            label10.Size = new Size(76, 25);
             label10.TabIndex = 59;
             label10.Text = "Địa Chỉ";
             label10.TextAlign = ContentAlignment.MiddleCenter;
@@ -231,10 +231,10 @@
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label10);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(6, 7);
-            panel3.Margin = new Padding(6, 7, 6, 7);
+            panel3.Location = new Point(4, 4);
+            panel3.Margin = new Padding(4, 4, 4, 4);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1125, 592);
+            panel3.Size = new Size(549, 371);
             panel3.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -242,17 +242,17 @@
             tableLayoutPanel1.BackColor = Color.Silver;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 1036F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 638F));
             tableLayoutPanel1.Controls.Add(dgvNCC, 1, 0);
             tableLayoutPanel1.Controls.Add(panel3, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Bottom;
-            tableLayoutPanel1.Location = new Point(0, 76);
-            tableLayoutPanel1.Margin = new Padding(6, 7, 6, 7);
+            tableLayoutPanel1.Location = new Point(0, 47);
+            tableLayoutPanel1.Margin = new Padding(4, 4, 4, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 606F));
-            tableLayoutPanel1.Size = new Size(2173, 606);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 379F));
+            tableLayoutPanel1.Size = new Size(1195, 379);
             tableLayoutPanel1.TabIndex = 70;
             // 
             // dgvNCC
@@ -275,8 +275,8 @@
             dgvNCC.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvNCC.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvNCC.Dock = DockStyle.Fill;
-            dgvNCC.Location = new Point(1143, 7);
-            dgvNCC.Margin = new Padding(6, 7, 6, 7);
+            dgvNCC.Location = new Point(561, 4);
+            dgvNCC.Margin = new Padding(4, 4, 4, 4);
             dgvNCC.MultiSelect = false;
             dgvNCC.Name = "dgvNCC";
             dgvNCC.ReadOnly = true;
@@ -297,7 +297,7 @@
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
             dgvNCC.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvNCC.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvNCC.Size = new Size(1024, 592);
+            dgvNCC.Size = new Size(630, 371);
             dgvNCC.TabIndex = 1;
             dgvNCC.CellContentClick += dgvNCC_CellContentClick;
             // 
@@ -309,10 +309,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(2102, 0);
-            button1.Margin = new Padding(6, 7, 6, 7);
+            button1.Location = new Point(1294, 0);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(72, 76);
+            button1.Size = new Size(44, 48);
             button1.TabIndex = 69;
             button1.Text = "X";
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -327,26 +327,26 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button9.ForeColor = Color.White;
-            button9.Location = new Point(1694, 0);
-            button9.Margin = new Padding(6, 7, 6, 7);
+            button9.Location = new Point(1042, 0);
+            button9.Margin = new Padding(4, 4, 4, 4);
             button9.Name = "button9";
-            button9.Size = new Size(72, 76);
+            button9.Size = new Size(44, 48);
             button9.TabIndex = 72;
             button9.TextImageRelation = TextImageRelation.ImageBeforeText;
             button9.UseVisualStyleBackColor = false;
             // 
             // Form_NCC
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 26, 26);
-            ClientSize = new Size(2173, 682);
+            ClientSize = new Size(1195, 426);
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(button9);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(6, 7, 6, 7);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "Form_NCC";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmNCC";

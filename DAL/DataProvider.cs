@@ -5,15 +5,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 //using System.Windows.Forms;
 
 namespace DAL
 {
     public class DataProvider
     {
+
         public static SqlConnection Openconnect()
         {
-            string sChuoiKetNoi = @"Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
+            string sChuoiKetNoi = @"Data Source=LAPTOP-4TC8L8F1;Initial Catalog=data;Integrated Security=True;TrustServerCertificate=True";
             SqlConnection con = new SqlConnection(sChuoiKetNoi);
             con.Open();
             return con;
@@ -25,7 +27,7 @@ namespace DAL
 
         public static string getConnectionString()
         {
-           return @"Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
+            return @"Server=LAPTOP-4TC8L8F1;Database=data;Trusted_Connection=True;TrustServerCertificate=true;";
         }
 
         public static int JustExcuteNoParameter(string sql)
@@ -45,20 +47,37 @@ namespace DAL
                 return -1;
             }
         }
-
+        // này
         public static int JustExcuteWithParameter(string sql, params SqlParameter[] parameters)
         {
-            using (SqlConnection connection = new SqlConnection(sql))
+            string connectionString = @"Data Source=LAPTOP-4TC8L8F1;Initial Catalog=data;Integrated Security=True;TrustServerCertificate=True";
+
+            try
             {
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.Parameters.AddRange(parameters);
-                    connection.Open();
-                    return command.ExecuteNonQuery();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddRange(parameters);
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"SQL Error: {ex.Message}");
+                return -1; // Trả về -1 để biểu thị lỗi
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                return -1; // Trả về -1 để biểu thị lỗi
             }
         }
 
+
+        // gióng
         public static DataTable GetTable(string sql)
         {
             SqlConnection con = Openconnect();
@@ -68,6 +87,26 @@ namespace DAL
             Disconnect(con);
             return dt;
         }
+
+
+        // này
+        public static DataTable GetTableWithParameters(string sql, SqlParameter[] parameters)
+        {
+            string connectionString = @"Data Source=LAPTOP-4TC8L8F1;Initial Catalog=data;Integrated Security=True;TrustServerCertificate=True";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddRange(parameters);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+        //nay
 
         public static DataTable GetTable1(string sql, SqlParameter[] parameters = null)
         {
@@ -100,34 +139,42 @@ namespace DAL
                 }
             }
         }
-        //TÍNH /
-        ///ktra email
         public static object ExecuteScalar(string sql, SqlParameter[] parameters)
         {
-            string connectionString = getConnectionString();
-
-            using (SqlConnection conn = new SqlConnection(connectionString))  // connectionString là chuỗi kết nối của bạn
+            if (string.IsNullOrWhiteSpace(sql))
             {
-                try
+                throw new ArgumentException("Câu lệnh SQL không được để trống.", nameof(sql));
+            }
+
+            string connectionString = @"Data Source=LAPTOP-4TC8L8F1;Initial Catalog=data;Integrated Security=True;TrustServerCertificate=True";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        // Thêm tham số vào câu lệnh SQL
-                        cmd.Parameters.AddRange(parameters);
+                        if (parameters != null && parameters.Length > 0)
+                        {
+                            cmd.Parameters.AddRange(parameters);
+                        }
 
-                        // Thực thi câu lệnh và trả về giá trị scalar (đơn)
                         return cmd.ExecuteScalar();
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Lỗi khi thực thi câu lệnh SQL: " + ex.Message);
-                    return null;
-                }
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi hoặc xử lý tùy thuộc vào yêu cầu
+                Console.WriteLine("Lỗi khi thực thi câu lệnh SQL: " + ex.Message);
+
+                // Tùy chọn: Ném lại lỗi nếu cần thiết
+                throw new InvalidOperationException("Không thể thực thi câu lệnh SQL.", ex);
             }
         }
+
         public static int ExecuteCommand(string query, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = Openconnect())
@@ -140,21 +187,6 @@ namespace DAL
                 }
             }
         }
-        public static DataTable GetTableWithParameters(string sql, SqlParameter[] parameters)
-        {
-            
 
-            using (SqlConnection con = new SqlConnection(getConnectionString()))
-            {
-                using (SqlCommand cmd = new SqlCommand(sql, con))
-                {
-                    cmd.Parameters.AddRange(parameters);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
-            }
-        }
     }
 }

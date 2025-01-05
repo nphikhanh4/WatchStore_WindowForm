@@ -213,6 +213,7 @@ namespace DONGHO.Forms
                 {
                     MessageBox.Show("Vui lòng chọn một nhà cung cấp để cập nhật!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                LoadDataGridView();
             }
             catch (Exception ex)
             {

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 
 namespace DAL
@@ -98,27 +99,27 @@ namespace DAL
             {
                 // SQL kiểm tra sản phẩm đã tồn tại
                 string sqlCheckExist = @"
-            SELECT COUNT(*) 
-            FROM Product 
-            WHERE ProductName = @ProductName AND SupplierID = @SupplierID 
+                SELECT COUNT(*) 
+                FROM Product 
+                WHERE ProductName = @ProductName AND SupplierID = @SupplierID 
                   AND CategoryID = @CategoryID AND BrandID = @BrandID";
 
                 // SQL cập nhật sản phẩm nếu đã tồn tại
                 string sqlUpdate = @"
-            UPDATE Product 
-            SET ImportPrice = @ImportPrice, 
-                StockQuantity = StockQuantity + @StockQuantity ,
-                Price = 0,
-                ProfitMargin = 0,
-                Profit=0
+                UPDATE Product 
+                SET ImportPrice = @ImportPrice, 
+                    StockQuantity = StockQuantity + @StockQuantity ,
+                    Price = 0,
+                    ProfitMargin = 0,
+                    Profit=0
 
-            WHERE ProductName = @ProductName AND SupplierID = @SupplierID 
+                WHERE ProductName = @ProductName AND SupplierID = @SupplierID 
                   AND CategoryID = @CategoryID AND BrandID = @BrandID";
 
                 // SQL thêm mới sản phẩm
                 string sqlInsert = @"
-            INSERT INTO Product (ProductName, SupplierID, ImportPrice, CreatedAt, StockQuantity, ImageUrl, BrandID, CategoryID) 
-            VALUES (@ProductName, @SupplierID, @ImportPrice, @CreatedAt, @StockQuantity, @Img, @BrandID, @CategoryID)";
+                INSERT INTO Product (ProductName, SupplierID, ImportPrice, CreatedAt, StockQuantity, ImageUrl, BrandID, CategoryID) 
+                VALUES (@ProductName, @SupplierID, @ImportPrice, @CreatedAt, @StockQuantity, @Img, @BrandID, @CategoryID)";
 
                 // Tạo mảng tham số dùng chung
                 SqlParameter[] parameters = new SqlParameter[]
@@ -140,12 +141,15 @@ namespace DAL
                 {
                     // Tạo mảng tham số mới để cập nhật (không dùng lại tham số cũ)
                     SqlParameter[] updateParams = parameters.Select(p => new SqlParameter(p.ParameterName, p.SqlDbType) { Value = p.Value }).ToArray();
+                    MessageBox.Show("CapNhatSP");
                     return DataProvider.JustExcuteWithParameter(sqlUpdate, updateParams);
                 }
                 else
                 {
                     // Tạo mảng tham số mới để thêm mới
                     SqlParameter[] insertParams = parameters.Select(p => new SqlParameter(p.ParameterName, p.SqlDbType) { Value = p.Value }).ToArray();
+                    MessageBox.Show("ThemMoiSP");
+
                     return DataProvider.JustExcuteWithParameter(sqlInsert, insertParams);
                 }
             }
@@ -325,8 +329,8 @@ namespace DAL
             }
             catch (Exception ex)
             {
-             
-                Console.WriteLine("Lỗi khi cập nhật nhà cung cấp: " + ex.Message);
+                MessageBox.Show("Lỗi khi cập nhật nhà cung cấp: " + ex.Message);
+                //Console.WriteLine("Lỗi khi cập nhật nhà cung cấp: " + ex.Message);
                 return false; 
             }
         }
@@ -353,8 +357,8 @@ namespace DAL
 
                 // Nếu email chưa tồn tại, thực hiện thêm nhà cung cấp mới
                 string sql = @"
-                    INSERT INTO Supplier (ContactName, Phone, Email, Address, CreatedAt)
-                    VALUES (@ContactName, @Phone, @Email, @Address, @CreatedAt);
+                    INSERT INTO Supplier (ContactName, Phone, Email, Address, CreatedAt, check_Remove)
+                    VALUES (@ContactName, @Phone, @Email, @Address, @CreatedAt, 1);
                     ";
 
                 DateTime currentDate = DateTime.Now;

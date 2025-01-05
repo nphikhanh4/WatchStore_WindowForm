@@ -74,8 +74,7 @@ namespace DONGHO.Usercontrols
                     dgvKhachHang.Rows[rowIndex].Cells["Address"].Value = row["Address"];
                     dgvKhachHang.Rows[rowIndex].Cells["CreatedAt"].Value = row["CreatedAt"];
                     dgvKhachHang.Rows[rowIndex].Cells["Gender"].Value = row["Gender"];
-
-                    string imagePath = Path.Combine(@"D:\BTL_W\BTL_W\BTL\Resources\", row["ImgCustomer"].ToString());
+                    string imagePath = Path.Combine(@"C:\Users\Admin\Downloads\imgCustomer\imgCustomer\", row["ImgCustomer"].ToString());
                     dgvKhachHang.Rows[rowIndex].Cells["ImgCustomerPath"].Value = imagePath; // Lưu đường dẫn vào cột ẩn
 
                     if (File.Exists(imagePath))

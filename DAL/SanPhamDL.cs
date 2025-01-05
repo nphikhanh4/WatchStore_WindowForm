@@ -39,7 +39,7 @@ namespace DAL
                   [ImageUrl], [SupplierID], [CreatedAt], [CreatedBy], 
                   [Discount], [Check_Remove], [AverageRating], 
                   [ImportPrice], [Profit], [ProfitMargin]              
-                FROM [WatchStore].[dbo].[Product]
+                FROM [dbo].[Product]
                 WHERE Check_Remove = 1";
 
                 DataTable dt = new DataTable();
@@ -86,7 +86,7 @@ namespace DAL
             try
             {
                 string sql = @"
-            UPDATE [WatchStore].[dbo].[Product]
+            UPDATE [dbo].[Product]
             SET 
                 [ProductName] = @ProductName,
                 [BrandID] = @BrandID,
@@ -255,7 +255,7 @@ namespace DAL
                                           [ImageUrl], [SupplierID], [CreatedAt], [CreatedBy], 
                                           [Discount], [Check_Remove], [AverageRating], 
                                           [ImportPrice], [Profit], [ProfitMargin]              
-                                        FROM [WatchStore].[dbo].[Product]
+                                        FROM [dbo].[Product]
                                         WHERE Check_Remove = 1";
 
 

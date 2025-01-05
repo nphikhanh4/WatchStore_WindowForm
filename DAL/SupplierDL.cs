@@ -37,7 +37,7 @@ namespace DAL
                       ,[Address]
                       ,[CreatedAt],
                         check_Remove
-                  FROM [WatchStore].[dbo].[Supplier]";
+                  FROM [dbo].[Supplier]";
 
                 DataTable dt = new DataTable();
                 dt = DataProvider.GetTable(sql);
