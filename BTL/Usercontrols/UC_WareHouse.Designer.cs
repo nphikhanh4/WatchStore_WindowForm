@@ -99,13 +99,14 @@
             tableLayoutPanel3.Controls.Add(panel8, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Left;
             tableLayoutPanel3.Location = new Point(0, 0);
-            tableLayoutPanel3.Margin = new Padding(4, 5, 4, 5);
+            tableLayoutPanel3.Margin = new Padding(6, 8, 6, 8);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 8F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 92F));
-            tableLayoutPanel3.Size = new Size(502, 695);
+            tableLayoutPanel3.Size = new Size(815, 1112);
             tableLayoutPanel3.TabIndex = 2;
+            tableLayoutPanel3.Paint += tableLayoutPanel3_Paint;
             // 
             // pnlThongTinSanPham
             // 
@@ -128,18 +129,17 @@
             pnlThongTinSanPham.Controls.Add(label6);
             pnlThongTinSanPham.Controls.Add(btnTaoPhieu);
             pnlThongTinSanPham.Dock = DockStyle.Fill;
-            pnlThongTinSanPham.Location = new Point(4, 60);
-            pnlThongTinSanPham.Margin = new Padding(4, 5, 4, 5);
+            pnlThongTinSanPham.Location = new Point(6, 96);
+            pnlThongTinSanPham.Margin = new Padding(6, 8, 6, 8);
             pnlThongTinSanPham.Name = "pnlThongTinSanPham";
-            pnlThongTinSanPham.Size = new Size(494, 630);
+            pnlThongTinSanPham.Size = new Size(803, 1008);
             pnlThongTinSanPham.TabIndex = 55;
             // 
             // button5
             // 
-            button5.Location = new Point(391, 592);
-            button5.Margin = new Padding(2);
+            button5.Location = new Point(635, 948);
             button5.Name = "button5";
-            button5.Size = new Size(92, 29);
+            button5.Size = new Size(150, 46);
             button5.TabIndex = 74;
             button5.Text = "Hủy";
             button5.UseVisualStyleBackColor = true;
@@ -150,10 +150,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(18, 230);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(29, 368);
+            label1.Margin = new Padding(6, 0, 6, 0);
             label1.Name = "label1";
-            label1.Size = new Size(135, 25);
+            label1.Size = new Size(217, 37);
             label1.TabIndex = 73;
             label1.Text = "Hãng/Thể loại";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -161,57 +161,53 @@
             // dgvAdd
             // 
             dgvAdd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAdd.Location = new Point(11, 352);
-            dgvAdd.Margin = new Padding(2);
+            dgvAdd.Location = new Point(18, 564);
             dgvAdd.Name = "dgvAdd";
             dgvAdd.RowHeadersWidth = 82;
-            dgvAdd.Size = new Size(481, 199);
+            dgvAdd.Size = new Size(782, 319);
             dgvAdd.TabIndex = 72;
+            dgvAdd.CellContentClick += dgvAdd_CellContentClick;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(156, 267);
-            pictureBox1.Margin = new Padding(2);
+            pictureBox1.Location = new Point(254, 427);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(123, 62);
+            pictureBox1.Size = new Size(200, 100);
             pictureBox1.TabIndex = 71;
             pictureBox1.TabStop = false;
             // 
             // button4
             // 
-            button4.Location = new Point(18, 289);
-            button4.Margin = new Padding(2);
+            button4.Location = new Point(29, 463);
             button4.Name = "button4";
-            button4.Size = new Size(130, 29);
+            button4.Size = new Size(211, 46);
             button4.TabIndex = 70;
             button4.Text = "Chọn ảnh";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            button4.Click += button4_Click_1;
             // 
             // cbbCategory
             // 
             cbbCategory.FormattingEnabled = true;
-            cbbCategory.Location = new Point(328, 228);
-            cbbCategory.Margin = new Padding(2);
+            cbbCategory.Location = new Point(533, 365);
             cbbCategory.Name = "cbbCategory";
-            cbbCategory.Size = new Size(136, 28);
+            cbbCategory.Size = new Size(219, 40);
             cbbCategory.TabIndex = 69;
             // 
             // cbbBrand
             // 
             cbbBrand.FormattingEnabled = true;
-            cbbBrand.Location = new Point(157, 228);
-            cbbBrand.Margin = new Padding(2);
+            cbbBrand.Location = new Point(255, 365);
             cbbBrand.Name = "cbbBrand";
-            cbbBrand.Size = new Size(136, 28);
+            cbbBrand.Size = new Size(219, 40);
             cbbBrand.TabIndex = 67;
+            cbbBrand.SelectedIndexChanged += cbcBrand_SelectedIndexChanged;
             // 
             // button3
             // 
-            button3.Location = new Point(274, 592);
-            button3.Margin = new Padding(2);
+            button3.Location = new Point(445, 948);
             button3.Name = "button3";
-            button3.Size = new Size(92, 29);
+            button3.Size = new Size(150, 46);
             button3.TabIndex = 65;
             button3.Text = "Lưu";
             button3.UseVisualStyleBackColor = true;
@@ -219,10 +215,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(327, 301);
-            button2.Margin = new Padding(2);
+            button2.Location = new Point(532, 481);
             button2.Name = "button2";
-            button2.Size = new Size(143, 29);
+            button2.Size = new Size(232, 46);
             button2.TabIndex = 64;
             button2.Text = "Thêm phiếu nhập";
             button2.UseVisualStyleBackColor = true;
@@ -230,18 +225,16 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(157, 122);
-            textBox2.Margin = new Padding(2);
+            textBox2.Location = new Point(255, 196);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(307, 27);
+            textBox2.Size = new Size(497, 39);
             textBox2.TabIndex = 63;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(156, 66);
-            textBox1.Margin = new Padding(2);
+            textBox1.Location = new Point(254, 106);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(307, 27);
+            textBox1.Size = new Size(497, 39);
             textBox1.TabIndex = 62;
             // 
             // txtSoLuong
@@ -249,10 +242,10 @@
             txtSoLuong.BackColor = Color.White;
             txtSoLuong.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSoLuong.ForeColor = Color.Black;
-            txtSoLuong.Location = new Point(157, 169);
-            txtSoLuong.Margin = new Padding(4, 5, 4, 5);
+            txtSoLuong.Location = new Point(255, 270);
+            txtSoLuong.Margin = new Padding(6, 8, 6, 8);
             txtSoLuong.Name = "txtSoLuong";
-            txtSoLuong.Size = new Size(307, 34);
+            txtSoLuong.Size = new Size(496, 51);
             txtSoLuong.TabIndex = 60;
             // 
             // label2
@@ -260,10 +253,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(54, 178);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(88, 284);
+            label2.Margin = new Padding(6, 0, 6, 0);
             label2.Name = "label2";
-            label2.Size = new Size(97, 25);
+            label2.Size = new Size(155, 37);
             label2.TabIndex = 61;
             label2.Text = "Số Lượng";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -273,10 +266,10 @@
             label9.AutoSize = true;
             label9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.Black;
-            label9.Location = new Point(11, 124);
-            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Location = new Point(18, 198);
+            label9.Margin = new Padding(6, 0, 6, 0);
             label9.Name = "label9";
-            label9.Size = new Size(135, 25);
+            label9.Size = new Size(222, 37);
             label9.TabIndex = 61;
             label9.Text = "Đơn Giá Nhập";
             label9.TextAlign = ContentAlignment.MiddleCenter;
@@ -286,10 +279,10 @@
             lblDaTaoPhieuNhap.AutoSize = true;
             lblDaTaoPhieuNhap.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDaTaoPhieuNhap.ForeColor = Color.ForestGreen;
-            lblDaTaoPhieuNhap.Location = new Point(327, 15);
-            lblDaTaoPhieuNhap.Margin = new Padding(4, 0, 4, 0);
+            lblDaTaoPhieuNhap.Location = new Point(532, 24);
+            lblDaTaoPhieuNhap.Margin = new Padding(6, 0, 6, 0);
             lblDaTaoPhieuNhap.Name = "lblDaTaoPhieuNhap";
-            lblDaTaoPhieuNhap.Size = new Size(149, 20);
+            lblDaTaoPhieuNhap.Size = new Size(227, 30);
             lblDaTaoPhieuNhap.TabIndex = 61;
             lblDaTaoPhieuNhap.Text = "Đã tạo phiếu nhập!";
             lblDaTaoPhieuNhap.TextAlign = ContentAlignment.MiddleCenter;
@@ -300,10 +293,10 @@
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(54, 68);
-            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Location = new Point(88, 108);
+            label6.Margin = new Padding(6, 0, 6, 0);
             label6.Name = "label6";
-            label6.Size = new Size(79, 25);
+            label6.Size = new Size(123, 37);
             label6.TabIndex = 61;
             label6.Text = "Tên SP";
             label6.TextAlign = ContentAlignment.MiddleCenter;
@@ -316,10 +309,10 @@
             btnTaoPhieu.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnTaoPhieu.ForeColor = Color.White;
             btnTaoPhieu.ImageAlign = ContentAlignment.MiddleLeft;
-            btnTaoPhieu.Location = new Point(156, 15);
-            btnTaoPhieu.Margin = new Padding(4, 5, 4, 5);
+            btnTaoPhieu.Location = new Point(254, 24);
+            btnTaoPhieu.Margin = new Padding(6, 8, 6, 8);
             btnTaoPhieu.Name = "btnTaoPhieu";
-            btnTaoPhieu.Size = new Size(164, 33);
+            btnTaoPhieu.Size = new Size(266, 53);
             btnTaoPhieu.TabIndex = 58;
             btnTaoPhieu.Text = "Tạo Phiếu";
             btnTaoPhieu.TextAlign = ContentAlignment.MiddleRight;
@@ -331,10 +324,10 @@
             panel8.BackColor = Color.White;
             panel8.Controls.Add(label3);
             panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(4, 5);
-            panel8.Margin = new Padding(4, 5, 4, 5);
+            panel8.Location = new Point(6, 8);
+            panel8.Margin = new Padding(6, 8, 6, 8);
             panel8.Name = "panel8";
-            panel8.Size = new Size(494, 45);
+            panel8.Size = new Size(803, 72);
             panel8.TabIndex = 0;
             // 
             // label3
@@ -344,9 +337,9 @@
             label3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
             label3.Location = new Point(0, 0);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Margin = new Padding(6, 0, 6, 0);
             label3.Name = "label3";
-            label3.Size = new Size(494, 45);
+            label3.Size = new Size(803, 72);
             label3.TabIndex = 57;
             label3.Text = "Thông Tin Nhập Sản Phẩm";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -359,13 +352,13 @@
             tableLayoutPanel4.Controls.Add(panel9, 0, 1);
             tableLayoutPanel4.Controls.Add(panel10, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Top;
-            tableLayoutPanel4.Location = new Point(502, 0);
-            tableLayoutPanel4.Margin = new Padding(4, 5, 4, 5);
+            tableLayoutPanel4.Location = new Point(815, 0);
+            tableLayoutPanel4.Margin = new Padding(6, 8, 6, 8);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 17.48252F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 82.51748F));
-            tableLayoutPanel4.Size = new Size(811, 336);
+            tableLayoutPanel4.Size = new Size(1319, 537);
             tableLayoutPanel4.TabIndex = 3;
             // 
             // panel9
@@ -373,10 +366,10 @@
             panel9.BackColor = Color.White;
             panel9.Controls.Add(dgvSanPham);
             panel9.Dock = DockStyle.Fill;
-            panel9.Location = new Point(4, 63);
-            panel9.Margin = new Padding(4, 5, 4, 5);
+            panel9.Location = new Point(6, 101);
+            panel9.Margin = new Padding(6, 8, 6, 8);
             panel9.Name = "panel9";
-            panel9.Size = new Size(803, 268);
+            panel9.Size = new Size(1307, 428);
             panel9.TabIndex = 1;
             // 
             // dgvSanPham
@@ -400,7 +393,7 @@
             dgvSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSanPham.Dock = DockStyle.Fill;
             dgvSanPham.Location = new Point(0, 0);
-            dgvSanPham.Margin = new Padding(4, 5, 4, 5);
+            dgvSanPham.Margin = new Padding(6, 8, 6, 8);
             dgvSanPham.MultiSelect = false;
             dgvSanPham.Name = "dgvSanPham";
             dgvSanPham.ReadOnly = true;
@@ -422,7 +415,7 @@
             dgvSanPham.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvSanPham.RowTemplate.Height = 30;
             dgvSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSanPham.Size = new Size(803, 268);
+            dgvSanPham.Size = new Size(1307, 428);
             dgvSanPham.TabIndex = 1;
             // 
             // panel10
@@ -430,10 +423,10 @@
             panel10.BackColor = Color.White;
             panel10.Controls.Add(label4);
             panel10.Dock = DockStyle.Fill;
-            panel10.Location = new Point(4, 5);
-            panel10.Margin = new Padding(4, 5, 4, 5);
+            panel10.Location = new Point(6, 8);
+            panel10.Margin = new Padding(6, 8, 6, 8);
             panel10.Name = "panel10";
-            panel10.Size = new Size(803, 48);
+            panel10.Size = new Size(1307, 77);
             panel10.TabIndex = 0;
             // 
             // label4
@@ -443,9 +436,9 @@
             label4.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
             label4.Location = new Point(0, 0);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Margin = new Padding(6, 0, 6, 0);
             label4.Name = "label4";
-            label4.Size = new Size(803, 48);
+            label4.Size = new Size(1307, 77);
             label4.TabIndex = 56;
             label4.Text = "Danh Sach Sản Phẩm Trong Cửa Hàng";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -458,13 +451,13 @@
             tableLayoutPanel1.Controls.Add(panel1, 0, 1);
             tableLayoutPanel1.Controls.Add(panel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(502, 336);
-            tableLayoutPanel1.Margin = new Padding(4, 5, 4, 5);
+            tableLayoutPanel1.Location = new Point(815, 537);
+            tableLayoutPanel1.Margin = new Padding(6, 8, 6, 8);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.48252F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 82.51748F));
-            tableLayoutPanel1.Size = new Size(811, 299);
+            tableLayoutPanel1.Size = new Size(1319, 479);
             tableLayoutPanel1.TabIndex = 4;
             // 
             // panel1
@@ -472,10 +465,10 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(dgvPhieuNhap);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(4, 57);
-            panel1.Margin = new Padding(4, 5, 4, 5);
+            panel1.Location = new Point(6, 91);
+            panel1.Margin = new Padding(6, 8, 6, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(803, 237);
+            panel1.Size = new Size(1307, 380);
             panel1.TabIndex = 1;
             // 
             // dgvPhieuNhap
@@ -499,7 +492,7 @@
             dgvPhieuNhap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPhieuNhap.Dock = DockStyle.Fill;
             dgvPhieuNhap.Location = new Point(0, 0);
-            dgvPhieuNhap.Margin = new Padding(4, 5, 4, 5);
+            dgvPhieuNhap.Margin = new Padding(6, 8, 6, 8);
             dgvPhieuNhap.MultiSelect = false;
             dgvPhieuNhap.Name = "dgvPhieuNhap";
             dgvPhieuNhap.ReadOnly = true;
@@ -521,7 +514,7 @@
             dgvPhieuNhap.RowsDefaultCellStyle = dataGridViewCellStyle8;
             dgvPhieuNhap.RowTemplate.Height = 30;
             dgvPhieuNhap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPhieuNhap.Size = new Size(803, 237);
+            dgvPhieuNhap.Size = new Size(1307, 380);
             dgvPhieuNhap.TabIndex = 1;
             dgvPhieuNhap.CellContentClick += dgvPhieuNhap_CellContentClick;
             // 
@@ -530,10 +523,10 @@
             panel2.BackColor = Color.White;
             panel2.Controls.Add(label5);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(4, 5);
-            panel2.Margin = new Padding(4, 5, 4, 5);
+            panel2.Location = new Point(6, 8);
+            panel2.Margin = new Padding(6, 8, 6, 8);
             panel2.Name = "panel2";
-            panel2.Size = new Size(803, 42);
+            panel2.Size = new Size(1307, 67);
             panel2.TabIndex = 0;
             // 
             // label5
@@ -543,19 +536,18 @@
             label5.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.White;
             label5.Location = new Point(0, 0);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Margin = new Padding(6, 0, 6, 0);
             label5.Name = "label5";
-            label5.Size = new Size(803, 42);
+            label5.Size = new Size(1307, 67);
             label5.TabIndex = 56;
             label5.Text = "Danh Sách Sản Phẩm Trong Kho";
             label5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
-            button1.Location = new Point(528, 651);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(858, 1041);
             button1.Name = "button1";
-            button1.Size = new Size(188, 39);
+            button1.Size = new Size(306, 63);
             button1.TabIndex = 59;
             button1.Text = "nhập về cửa hàng";
             button1.UseVisualStyleBackColor = true;
@@ -614,18 +606,17 @@
             // 
             // button6
             // 
-            button6.Location = new Point(758, 652);
-            button6.Margin = new Padding(2);
+            button6.Location = new Point(1232, 1044);
             button6.Name = "button6";
-            button6.Size = new Size(92, 38);
+            button6.Size = new Size(150, 60);
             button6.TabIndex = 75;
             button6.Text = "Xóa";
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
-            // UC_WareHouse
+            // UC_Sales
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             Controls.Add(button6);
@@ -633,9 +624,10 @@
             Controls.Add(tableLayoutPanel1);
             Controls.Add(tableLayoutPanel4);
             Controls.Add(tableLayoutPanel3);
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "UC_WareHouse";
-            Size = new Size(1313, 695);
+            Margin = new Padding(6, 8, 6, 8);
+            Name = "UC_Sales";
+            Size = new Size(2134, 1112);
+            Load += UC_Sales_Load_2;
             tableLayoutPanel3.ResumeLayout(false);
             pnlThongTinSanPham.ResumeLayout(false);
             pnlThongTinSanPham.PerformLayout();

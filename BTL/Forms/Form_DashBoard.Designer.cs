@@ -37,7 +37,6 @@
             btnViewSales = new Button();
             btnNhanVien = new Button();
             btnUsers = new Button();
-            btnExpense = new Button();
             btnPurchase = new Button();
             btnSaleBooks = new Button();
             btnHome = new Button();
@@ -73,7 +72,6 @@
             panelLeft.Controls.Add(btnViewSales);
             panelLeft.Controls.Add(btnNhanVien);
             panelLeft.Controls.Add(btnUsers);
-            panelLeft.Controls.Add(btnExpense);
             panelLeft.Controls.Add(btnPurchase);
             panelLeft.Controls.Add(btnSaleBooks);
             panelLeft.Controls.Add(btnHome);
@@ -100,7 +98,7 @@
             btnWareHouse.ForeColor = Color.White;
             btnWareHouse.Image = DONGHO.Properties.Resources.Settings1;
             btnWareHouse.ImageAlign = ContentAlignment.MiddleLeft;
-            btnWareHouse.Location = new Point(5, 617);
+            btnWareHouse.Location = new Point(5, 556);
             btnWareHouse.Name = "btnWareHouse";
             btnWareHouse.Size = new Size(258, 60);
             btnWareHouse.TabIndex = 2;
@@ -117,7 +115,7 @@
             btnSettings.ForeColor = Color.White;
             btnSettings.Image = DONGHO.Properties.Resources.Settings1;
             btnSettings.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSettings.Location = new Point(5, 551);
+            btnSettings.Location = new Point(5, 622);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(258, 60);
             btnSettings.TabIndex = 2;
@@ -134,13 +132,14 @@
             btnViewSales.ForeColor = Color.White;
             btnViewSales.Image = DONGHO.Properties.Resources.Total_Sales1;
             btnViewSales.ImageAlign = ContentAlignment.MiddleLeft;
-            btnViewSales.Location = new Point(5, 487);
+            btnViewSales.Location = new Point(3, 424);
             btnViewSales.Name = "btnViewSales";
             btnViewSales.Size = new Size(258, 60);
             btnViewSales.TabIndex = 2;
             btnViewSales.Text = "     Xem doanh số";
             btnViewSales.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnViewSales.UseVisualStyleBackColor = true;
+            btnViewSales.Click += btnViewSales_Click;
             // 
             // btnNhanVien
             // 
@@ -148,9 +147,9 @@
             btnNhanVien.FlatStyle = FlatStyle.Flat;
             btnNhanVien.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNhanVien.ForeColor = Color.White;
-            btnNhanVien.Image = DONGHO.Properties.Resources.Customer1;
+            btnNhanVien.Image = (Image)resources.GetObject("btnNhanVien.Image");
             btnNhanVien.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNhanVien.Location = new Point(5, 683);
+            btnNhanVien.Location = new Point(4, 490);
             btnNhanVien.Name = "btnNhanVien";
             btnNhanVien.Size = new Size(258, 60);
             btnNhanVien.TabIndex = 2;
@@ -167,7 +166,7 @@
             btnUsers.ForeColor = Color.White;
             btnUsers.Image = DONGHO.Properties.Resources.Customer1;
             btnUsers.ImageAlign = ContentAlignment.MiddleLeft;
-            btnUsers.Location = new Point(5, 423);
+            btnUsers.Location = new Point(4, 358);
             btnUsers.Name = "btnUsers";
             btnUsers.Size = new Size(258, 60);
             btnUsers.TabIndex = 2;
@@ -175,22 +174,6 @@
             btnUsers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnUsers.UseVisualStyleBackColor = true;
             btnUsers.Click += BtnUsers_Click;
-            // 
-            // btnExpense
-            // 
-            btnExpense.FlatAppearance.BorderSize = 0;
-            btnExpense.FlatStyle = FlatStyle.Flat;
-            btnExpense.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnExpense.ForeColor = Color.White;
-            btnExpense.Image = DONGHO.Properties.Resources.Debt1;
-            btnExpense.ImageAlign = ContentAlignment.MiddleLeft;
-            btnExpense.Location = new Point(5, 357);
-            btnExpense.Name = "btnExpense";
-            btnExpense.Size = new Size(258, 60);
-            btnExpense.TabIndex = 2;
-            btnExpense.Text = "     Chi phí";
-            btnExpense.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnExpense.UseVisualStyleBackColor = true;
             // 
             // btnPurchase
             // 
@@ -449,7 +432,6 @@
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnViewSales;
         private System.Windows.Forms.Button btnUsers;
-        private System.Windows.Forms.Button btnExpense;
         private System.Windows.Forms.Button btnPurchase;
         private System.Windows.Forms.Button btnSaleBooks;
         private System.Windows.Forms.Label label4;

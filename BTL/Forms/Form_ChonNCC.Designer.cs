@@ -42,10 +42,10 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button9.ForeColor = Color.White;
-            button9.Location = new Point(594, 1);
-            button9.Margin = new Padding(4);
+            button9.Location = new Point(966, 2);
+            button9.Margin = new Padding(6, 7, 6, 7);
             button9.Name = "button9";
-            button9.Size = new Size(42, 51);
+            button9.Size = new Size(69, 81);
             button9.TabIndex = 20;
             button9.Text = "X";
             button9.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -61,10 +61,10 @@
             btnChon.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChon.ForeColor = Color.White;
             btnChon.ImageAlign = ContentAlignment.MiddleLeft;
-            btnChon.Location = new Point(496, 169);
-            btnChon.Margin = new Padding(4);
+            btnChon.Location = new Point(806, 271);
+            btnChon.Margin = new Padding(6, 7, 6, 7);
             btnChon.Name = "btnChon";
-            btnChon.Size = new Size(128, 57);
+            btnChon.Size = new Size(208, 91);
             btnChon.TabIndex = 17;
             btnChon.Text = "Chọn";
             btnChon.TextAlign = ContentAlignment.MiddleRight;
@@ -80,10 +80,10 @@
             button1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
             button1.Image = Properties.Resources.icons8_add_32px;
-            button1.Location = new Point(428, 68);
-            button1.Margin = new Padding(4);
+            button1.Location = new Point(696, 108);
+            button1.Margin = new Padding(6, 7, 6, 7);
             button1.Name = "button1";
-            button1.Size = new Size(46, 31);
+            button1.Size = new Size(74, 50);
             button1.TabIndex = 57;
             button1.TextAlign = ContentAlignment.MiddleRight;
             button1.UseVisualStyleBackColor = false;
@@ -95,38 +95,39 @@
             cboNCC.Font = new Font("Microsoft Sans Serif", 14.25F);
             cboNCC.ForeColor = Color.Black;
             cboNCC.FormattingEnabled = true;
-            cboNCC.Location = new Point(225, 66);
-            cboNCC.Margin = new Padding(4);
+            cboNCC.Location = new Point(366, 106);
+            cboNCC.Margin = new Padding(6, 7, 6, 7);
             cboNCC.Name = "cboNCC";
-            cboNCC.Size = new Size(196, 37);
+            cboNCC.Size = new Size(316, 52);
             cboNCC.TabIndex = 56;
+            cboNCC.SelectedIndexChanged += cboNCC_SelectedIndexChanged;
             // 
             // label24
             // 
             label24.AutoSize = true;
             label24.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label24.ForeColor = Color.Black;
-            label24.Location = new Point(80, 71);
-            label24.Margin = new Padding(4, 0, 4, 0);
+            label24.Location = new Point(130, 113);
+            label24.Margin = new Padding(6, 0, 6, 0);
             label24.Name = "label24";
-            label24.Size = new Size(133, 25);
+            label24.Size = new Size(217, 37);
             label24.TabIndex = 58;
             label24.Text = "Nhà cung cấp";
             label24.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Form_ChonNCC
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(640, 244);
+            ClientSize = new Size(1040, 391);
             Controls.Add(button1);
             Controls.Add(cboNCC);
             Controls.Add(label24);
             Controls.Add(button9);
             Controls.Add(btnChon);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4);
+            Margin = new Padding(6, 7, 6, 7);
             Name = "Form_ChonNCC";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmChonNCC";

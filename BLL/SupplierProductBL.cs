@@ -11,8 +11,12 @@ namespace BLL
     public class SupplierProductBL
     {
         private static SupplierProductBL Instance;
-
+       
         public static SupplierProductBL GetInstance
+   
+
+
+
         {
             get
             {
@@ -29,59 +33,61 @@ namespace BLL
             return SupplierProductDL.GetInstance.GetProductInStock();
         }
 
+
         public DataTable GetProduct()
         {
             return SupplierProductDL.GetInstance.GetProduct();
         }
 
+     
         private SupplierProductDL SupplierProductDL = new SupplierProductDL();
+
+        
 
         // Thêm sản phẩm vào bảng Product
         public bool AddProduct(string productName, int supplierID, decimal price, DateTime createdAt, int stockQuantity, string imageFileName, int BrandID, int CategoryID)
         {
-            return SupplierProductDL.AddProduct(productName, supplierID, price, createdAt, stockQuantity, imageFileName, BrandID, CategoryID) >= 0;
+            return SupplierProductDL.AddProduct(productName, supplierID, price, createdAt, stockQuantity,  imageFileName, BrandID, CategoryID) >= 0;
         }
-        
         public bool UpdateProductStatus(int productId, int newStatus)
         {
             return SupplierProductDL.UpdateProductStatus(productId, newStatus);
         }
-
-        //private SupplierProductDL supplierProductDL = new SupplierProductDL();  // Khởi tạo đối tượng SupplierProductDL
+        //
+        private SupplierProductDL supplierProductDL = new SupplierProductDL();  // Khởi tạo đối tượng SupplierProductDL
 
         public string GetBrandNameById(int brandID)
         {
-            return SupplierProductDL.GetInstance.GetBrandNameById(brandID); // Gọi phương thức từ DAL
+            return supplierProductDL.GetBrandNameById(brandID); // Gọi phương thức từ DAL
         }
-        
         public string GetCategoryNameById(int categoryID)
         {
-            return SupplierProductDL.GetInstance.GetCategoryNameById(categoryID); // Gọi phương thức từ DAL
+            return supplierProductDL.GetCategoryNameById(categoryID); // Gọi phương thức từ DAL
         }
-        
         public string GetSupplierNameById(int supplierID)
         {
-            return SupplierProductDL.GetInstance.GetSupplierNameById(supplierID); // Gọi phương thức từ DAL
+            return supplierProductDL.GetSupplierNameById(supplierID); // Gọi phương thức từ DAL
         }
-
+        // xg nua
         public bool UpdateSupplierRemove(int SupplierID, int check_Remove)
         {
-            return SupplierProductDL.GetInstance.UpdateSupplierRemove(SupplierID, check_Remove);
+            return SupplierProductDL.UpdateSupplierRemove(SupplierID, check_Remove);
         }
-        
         public bool UpdateSupplier(int SupplierID, string ContactName, string Phone, string Email, string Address)
         {
-            return SupplierProductDL.GetInstance.UpdateSupplier(SupplierID, ContactName, Phone, Email, Address);
+            return SupplierProductDL.UpdateSupplier(SupplierID, ContactName, Phone, Email, Address );
         }
 
-        public bool AddSupplier(string ContactName, string Phone, string Email, string Address)
+        public bool AddSupplier( string ContactName, string Phone, string Email, string Address )
         {
-            return SupplierProductDL.GetInstance.AddSupplier(ContactName, Phone, Email, Address);
+            return SupplierProductDL.AddSupplier( ContactName, Phone, Email, Address);
         }
-
-        public bool AddSupplierProduct(int supplierID, string productName, decimal price, int status, int quantity, string img, int categoryID, int brandID)
+        // find 
+        public bool AddSupplierProduct(int supplierID, string productName, decimal price, int status, int quantity,  string img, int categoryID, int brandID)
         {
             return SupplierProductDL.GetInstance.AddSupplierProduct(supplierID, productName, price, status, quantity, img, categoryID, brandID) > 0;
         }
+
+
     }
 }

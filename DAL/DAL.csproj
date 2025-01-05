@@ -51,6 +51,7 @@
     <Compile Include="Nhanvien.cs" />
     <Compile Include="ProductDL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDL.cs" />
     <Compile Include="SanPhamDL.cs" />
     <Compile Include="SignupDL.cs" />
     <Compile Include="SupplierDL.cs" />

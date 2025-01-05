@@ -1088,7 +1088,8 @@ namespace DONGHO.Usercontrols
                 string stockQuantity = row["SoLuong"].ToString();
                 string productName = row["TênSP"].ToString();
                 string discount = row["KhuyenMai"].ToString();
-                string imagePath = Path.Combine(@"D:\BTL_Web\Khanh\Web\WebApplication1\Content\img\", brandName, productName, productName + @".jpg");
+                string imageProduct = row["LinkHinhAnh"].ToString();
+                string imagePath = Path.Combine(@"D:\BTL_W\BTL_W\BTL\Images", imageProduct);
                 decimal reducedPrice = price * (100 - int.Parse(discount)) / 100;
 
                 PictureBox pictureBox = new PictureBox()
@@ -1098,14 +1099,13 @@ namespace DONGHO.Usercontrols
                     Padding = new Padding(35, 3, 0, 0),
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
-                if(productName == "Casio Edifice")
+                if (productName == "Casio Edifice")
                 {
                     pictureBox.Image = ResizeImage(@"D:\BTL_Web\Khanh\Web\WebApplication1\Content\img\Casio\Casio Sheen\Casio Sheen.jpg", 185, 145);
                 }
                 else
                 {
                     pictureBox.Image = ResizeImage(imagePath, 185, 145);
-
                 }
 
                 Label lblName = new Label

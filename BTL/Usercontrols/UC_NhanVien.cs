@@ -1,6 +1,8 @@
 ﻿using BLL;
 using DAL;
 using DONGHO.Forms;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SystemImage = System.Drawing.Image;
+using SystemFont = System.Drawing.Font;
 
 namespace DONGHO.Usercontrols
 {
@@ -75,7 +79,7 @@ namespace DONGHO.Usercontrols
 
                     if (File.Exists(imagePath))
                     {
-                        dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = Image.FromFile(imagePath);
+                        dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = SystemImage.FromFile(imagePath);
 
                     }
                     //else
@@ -118,7 +122,7 @@ namespace DONGHO.Usercontrols
                 string imagePath = dgvNhanVien.Rows[e.RowIndex].Cells["ImgAdminPath"].Value.ToString();
                 if (File.Exists(imagePath))
                 {
-                    picHinhAnh.Image = Image.FromFile(imagePath);
+                    picHinhAnh.Image = SystemImage.FromFile(imagePath);
                 }
                 else
                 {
@@ -177,6 +181,7 @@ namespace DONGHO.Usercontrols
                             int rowIndex = dgvNhanVien.Rows.Add();
 
                             dgvNhanVien.Rows[rowIndex].Cells["AdminID"].Value = row["AdminID"];
+                            dgvNhanVien.Rows[rowIndex].Cells["Adminname"].Value = row["Adminname"];
                             dgvNhanVien.Rows[rowIndex].Cells["FullName"].Value = row["FullName"];
                             dgvNhanVien.Rows[rowIndex].Cells["Email"].Value = row["Email"];
                             dgvNhanVien.Rows[rowIndex].Cells["Password"].Value = row["Password"];
@@ -190,7 +195,7 @@ namespace DONGHO.Usercontrols
 
                             if (File.Exists(imagePath))
                             {
-                                dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = Image.FromFile(imagePath);
+                                dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = SystemImage.FromFile(imagePath);
                             }
                         }
                     }
@@ -255,7 +260,7 @@ namespace DONGHO.Usercontrols
                             // Check if the image exists, then load it into the DataGridView
                             if (File.Exists(imagePath))
                             {
-                                dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = Image.FromFile(imagePath);
+                                dgvNhanVien.Rows[rowIndex].Cells["ImageColumn"].Value = SystemImage.FromFile(imagePath);
                             }
                             else
                             {
@@ -286,7 +291,7 @@ namespace DONGHO.Usercontrols
                 selectedImagePath = openFileDialog.FileName;
 
                 // Hiển thị ảnh lên PictureBox (tùy chọn)
-                picHinhAnh.Image = Image.FromFile(selectedImagePath);
+                picHinhAnh.Image = SystemImage.FromFile(selectedImagePath);
             }
         }
         private void btnThem_Click(object sender, EventArgs e)
@@ -497,7 +502,7 @@ namespace DONGHO.Usercontrols
                     }
                     else
                     {
-                        frm.lblThongBao.Text="Không thể lấy ảnh cũ.";
+                        frm.lblThongBao.Text = "Không thể lấy ảnh cũ.";
                         frm.ShowDialog();
                         return;
                     }
@@ -541,7 +546,126 @@ namespace DONGHO.Usercontrols
             LamMoi();
             LoadDanhSachNhanVien();
         }
+        private void inDSNV()
+        {
+            try
+            {
+                // Đăng ký mã hóa
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
+                // Tạo tài liệu PDF
+                iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                string outputPath = "D:/DanhSachNhanVien.pdf";
+                iTextSharp.text.pdf.PdfWriter.GetInstance(document, new FileStream(outputPath, FileMode.Create));
+                document.Open();
 
+                // Font chữ
+                string fontPath = @"C:\Windows\Fonts\tahoma.ttf";
+                if (!File.Exists(fontPath))
+                {
+                    MessageBox.Show("Font chữ không tồn tại. Kiểm tra đường dẫn font.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                iTextSharp.text.Font vietnameseFont = new iTextSharp.text.Font(baseFont, 12);
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(baseFont, 20, iTextSharp.text.Font.BOLD);
+
+                // Tiêu đề
+                iTextSharp.text.Paragraph header = new iTextSharp.text.Paragraph("DANH SÁCH NHÂN VIÊN", headerFont);
+                header.Alignment = Element.ALIGN_CENTER;
+                document.Add(header);
+
+                // Đường kẻ ngang
+                iTextSharp.text.Paragraph dashedLine = new iTextSharp.text.Paragraph("-------------------------------------------", vietnameseFont);
+                dashedLine.Alignment = Element.ALIGN_CENTER;
+                document.Add(dashedLine);
+
+                // Ngày lập
+                iTextSharp.text.Paragraph date = new iTextSharp.text.Paragraph($"Ngày lập: {DateTime.Now:dd/MM/yyyy HH:mm}", vietnameseFont);
+                date.Alignment = Element.ALIGN_RIGHT;
+                document.Add(date);
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                // Thông tin cửa hàng
+                document.Add(new iTextSharp.text.Paragraph("Cửa hàng: Watch Store", vietnameseFont));
+                document.Add(new iTextSharp.text.Paragraph("Địa chỉ: 450-451 Lê Văn Việt, Phường Tăng Nhơn Phú A, Hồ Chí Minh, Việt Nam", vietnameseFont));
+                document.Add(new iTextSharp.text.Paragraph("Nhân viên: Nguyễn Văn A", vietnameseFont));
+                document.Add(dashedLine);
+
+                // Bảng thông tin khách hàng
+                iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(5);
+                table.WidthPercentage = 100;
+
+                // Tiêu đề bảng
+
+                float[] columnWidths = new float[] { 7f, 28f, 28f, 28f,28f };
+                table.SetWidths(columnWidths);
+
+                table.AddCell(new iTextSharp.text.Phrase("STT", vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase("Tên nhân viên", vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase("Email", vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase("Phone", vietnameseFont));
+                table.AddCell(new iTextSharp.text.Phrase("Role", vietnameseFont));
+
+                // Lấy danh sách khách hàng
+                DataTable pd = NhanvienBL.GetInstance.GetDanhSachNV();
+                if (pd == null || pd.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không có dữ liệu nhân viên để in.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Duyệt qua danh sách khách hàng
+                int i = 1;
+                foreach (DataRow row in pd.Rows)
+                {
+                    table.AddCell(new iTextSharp.text.Phrase(i.ToString(), vietnameseFont));
+                    table.AddCell(new iTextSharp.text.Phrase(row["FullName"]?.ToString() ?? "N/A", vietnameseFont));
+                    table.AddCell(new iTextSharp.text.Phrase(row["Email"]?.ToString() ?? "N/A", vietnameseFont));
+                    table.AddCell(new iTextSharp.text.Phrase(row["Phone"]?.ToString() ?? "N/A", vietnameseFont));
+                    table.AddCell(new iTextSharp.text.Phrase(row["Role"]?.ToString() ?? "N/A", vietnameseFont));
+                    i++;
+                }
+
+                // Thêm bảng vào tài liệu
+                document.Add(table);
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+                document.Add(dashedLine);
+
+                // Lời cảm ơn
+                iTextSharp.text.Font thankFont = new iTextSharp.text.Font(baseFont, 14, iTextSharp.text.Font.ITALIC);
+                iTextSharp.text.Paragraph thank = new iTextSharp.text.Paragraph($"Cảm ơn quý khách đã mua hàng ở Watch Store\nChúc quý khách một ngày tốt lành!", thankFont);
+                thank.Alignment = Element.ALIGN_CENTER;
+                document.Add(thank);
+
+                // Đóng tài liệu
+                document.Close();
+                MessageBox.Show("Danh sách nhân viên đã được tạo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Mở file PDF
+                try
+                {
+                    var processInfo = new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = outputPath, // Đường dẫn file
+                        UseShellExecute = true // Mở bằng ứng dụng mặc định
+                    };
+                    System.Diagnostics.Process.Start(processInfo);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Không thể mở file PDF. Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi tạo nhân viên: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            inDSNV();
+        }
     }
 }

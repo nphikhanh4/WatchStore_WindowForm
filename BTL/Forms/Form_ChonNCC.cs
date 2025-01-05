@@ -20,11 +20,25 @@ namespace DONGHO.Forms
             LoadComboBoxData();
         }
 
+       
         private void button1_Click(object sender, EventArgs e)
         {
+            
             Form_NCC frm = new Form_NCC();
+
+           
+            frm.FormClosed += Frm_FormClosed;
+
             frm.ShowDialog();
         }
+
+        private void Frm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          
+            LoadComboBoxData();
+        }
+
+       
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -32,9 +46,8 @@ namespace DONGHO.Forms
         }
         private int selectedSupplierID;
 
-        private void LoadComboBoxData()
+        public void LoadComboBoxData()
         {
-
             cboNCC.DataSource = SupplierBL.GetInstance.GetDanhSachNhaCungCap();
             cboNCC.ValueMember = "SupplierID";
             cboNCC.DisplayMember = "ContactName";
@@ -45,17 +58,19 @@ namespace DONGHO.Forms
             if (cboNCC.SelectedValue != null)
             {
                 selectedSupplierID = Convert.ToInt32(cboNCC.SelectedValue);
-
-                // Hiển thị thông tin để kiểm tra (tùy chọn)
                 MessageBox.Show($"SupplierID được chọn: {selectedSupplierID}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SupplierProductDL.SelectedSupplierID = selectedSupplierID; // Gán giá trị
-
+                SupplierProductDL.SelectedSupplierID = selectedSupplierID;
                 this.Close();
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn nhà cung cấp!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void cboNCC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

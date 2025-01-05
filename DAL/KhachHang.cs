@@ -36,7 +36,7 @@ namespace DAL
                           ,[Phone]
                           ,[Gender]
                           ,[Address]
-                      FROM [WatchStore].[dbo].[Customer]";
+                      FROM [Customer] where check_Remove = 1";
 
               
 
@@ -54,7 +54,7 @@ namespace DAL
         {
             try
             {
-                string sql = "SELECT * FROM Customer WHERE FullName LIKE N'%" + searchText + "%'";
+                string sql = "SELECT * FROM Customer WHERE check_Remove = 1 and FullName LIKE N'%" + searchText + "%'";
                 
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;
@@ -91,7 +91,7 @@ namespace DAL
         {
             try
             {
-                string query = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
+                string query = "Update Customer set check_Remove = 0 WHERE check_Remove = 1 and CustomerID = @CustomerID";
                 SqlParameter[] parameters =
                 {
                     new SqlParameter("@CustomerID", CustomerID),
@@ -143,7 +143,7 @@ namespace DAL
                                   ,[Gender]
                                   ,[Address]
                            FROM [WatchStore].[dbo].[Customer]
-                           Where CustomerID = " + id; 
+                           Where check_Remove = 1 and CustomerID = " + id; 
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;
         }

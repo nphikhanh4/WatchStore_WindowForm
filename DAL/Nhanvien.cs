@@ -35,7 +35,7 @@ namespace DAL
                       ,[CreatedAt]
                       ,[Phone]
                       ,[Gender]
-                  FROM [WatchStore].[dbo].[Admin]";
+                  FROM [Admin] where check_Remove = 1";
 
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;
@@ -52,7 +52,7 @@ namespace DAL
         {
             try
             {
-                string sql = "SELECT * FROM Admin WHERE Adminname LIKE '%" + searchText + "%' OR Role LIKE '%" + searchText + "%'";
+                string sql = "SELECT * FROM Admin WHERE check_Remove = 1 and ( Adminname LIKE '%" + searchText + "%')";
                
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;
@@ -70,7 +70,7 @@ namespace DAL
         {
             try
             {
-                string sql = "SELECT * FROM Admin WHERE Role = N'" + role + "'";
+                string sql = "SELECT * FROM Admin WHERE Role = N'" + role + "' and check_Remove = 1";
                 DataTable dt = DataProvider.GetTable(sql);
                 return dt;
             }
@@ -106,7 +106,7 @@ namespace DAL
         {
             try
             {
-                string query = "DELETE FROM Admin WHERE AdminID = @AdminID";
+                string query = "Update Admin set check_Remove = 0  WHERE check_Remove = 1 and AdminID = @AdminID";
                 SqlParameter[] parameters =
                 {
                     new SqlParameter("@AdminID", adminId),

@@ -153,5 +153,12 @@ namespace Book
             UC_NhanVien ucW = new UC_NhanVien();
             AddControlsToPanel(ucW);
         }
+
+        private void btnViewSales_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(btnViewSales);
+            uc_Report ucR = new uc_Report();
+            AddControlsToPanel(ucR);
+        }
     }
 }

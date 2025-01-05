@@ -35,6 +35,7 @@
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Sales));
             btnLamMoi = new Button();
             btnApDung = new Button();
             txtTenSP = new TextBox();
@@ -649,6 +650,8 @@
             // 
             // foundSDT
             // 
+            foundSDT.ErrorImage = null;
+            foundSDT.InitialImage = (Image)resources.GetObject("foundSDT.InitialImage");
             foundSDT.Location = new Point(527, 66);
             foundSDT.Margin = new Padding(4, 5, 4, 5);
             foundSDT.Name = "foundSDT";

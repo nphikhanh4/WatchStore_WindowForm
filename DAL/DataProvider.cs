@@ -104,7 +104,7 @@ namespace DAL
         ///ktra email
         public static object ExecuteScalar(string sql, SqlParameter[] parameters)
         {
-            string connectionString = @"Data Source=LAPTOP-BJKTHL97\SQLEXPRESS;Initial Catalog=WatchStoreC#;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = getConnectionString();
 
             using (SqlConnection conn = new SqlConnection(connectionString))  // connectionString là chuỗi kết nối của bạn
             {
@@ -137,6 +137,22 @@ namespace DAL
                 {
                     cmd.Parameters.AddRange(parameters);
                     return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public static DataTable GetTableWithParameters(string sql, SqlParameter[] parameters)
+        {
+            
+
+            using (SqlConnection con = new SqlConnection(getConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddRange(parameters);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
                 }
             }
         }

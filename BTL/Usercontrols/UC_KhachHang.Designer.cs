@@ -60,6 +60,7 @@
             panel2 = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel4 = new Panel();
+            button1 = new Button();
             btnLamMoi = new Button();
             panel7 = new Panel();
             pictureBox2 = new PictureBox();
@@ -472,6 +473,7 @@
             // panel4
             // 
             panel4.BackColor = Color.White;
+            panel4.Controls.Add(button1);
             panel4.Controls.Add(btnLamMoi);
             panel4.Controls.Add(panel7);
             panel4.Dock = DockStyle.Fill;
@@ -482,6 +484,18 @@
             panel4.Size = new Size(655, 127);
             panel4.TabIndex = 55;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.DarkSalmon;
+            button1.ForeColor = SystemColors.ControlText;
+            button1.Location = new Point(551, 31);
+            button1.Name = "button1";
+            button1.Size = new Size(89, 49);
+            button1.TabIndex = 61;
+            button1.Text = "PDF";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // btnLamMoi
             // 
             btnLamMoi.BackColor = Color.MediumSeaGreen;
@@ -490,10 +504,10 @@
             btnLamMoi.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLamMoi.ForeColor = Color.White;
             btnLamMoi.ImageAlign = ContentAlignment.MiddleRight;
-            btnLamMoi.Location = new Point(497, 28);
+            btnLamMoi.Location = new Point(441, 31);
             btnLamMoi.Margin = new Padding(5, 4, 5, 4);
             btnLamMoi.Name = "btnLamMoi";
-            btnLamMoi.Size = new Size(105, 52);
+            btnLamMoi.Size = new Size(102, 49);
             btnLamMoi.TabIndex = 60;
             btnLamMoi.Text = "Làm mới";
             btnLamMoi.UseVisualStyleBackColor = false;
@@ -506,16 +520,16 @@
             panel7.Controls.Add(pictureBox2);
             panel7.Controls.Add(label7);
             panel7.Controls.Add(txtTenKH);
-            panel7.Location = new Point(22, 31);
+            panel7.Location = new Point(5, 31);
             panel7.Margin = new Padding(5);
             panel7.Name = "panel7";
-            panel7.Size = new Size(451, 49);
+            panel7.Size = new Size(426, 49);
             panel7.TabIndex = 59;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.icons8_search_24px;
-            pictureBox2.Location = new Point(396, 9);
+            pictureBox2.Location = new Point(379, 5);
             pictureBox2.Margin = new Padding(5);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(37, 33);
@@ -546,7 +560,7 @@
             txtTenKH.Location = new Point(177, 8);
             txtTenKH.Margin = new Padding(5);
             txtTenKH.Name = "txtTenKH";
-            txtTenKH.Size = new Size(256, 27);
+            txtTenKH.Size = new Size(192, 27);
             txtTenKH.TabIndex = 0;
             // 
             // panel5
@@ -744,5 +758,6 @@
         private PictureBox pictureBox2;
         private Label label7;
         private TextBox txtTenKH;
+        private Button button1;
     }
 }
